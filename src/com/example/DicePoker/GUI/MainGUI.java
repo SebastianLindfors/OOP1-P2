@@ -1,12 +1,9 @@
 package com.example.DicePoker.GUI;
 
-import com.sun.java.accessibility.util.TopLevelWindowListener;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,26 +36,34 @@ public class MainGUI extends Application {
 
         // Create a scene.
         Scene myScene = new Scene(rootNode, 200, 300);
+        myScene.getStylesheets().add("com.example.DicePoker.css");
 
         // Set the scene on the stage.
         myStage.setScene(myScene);
 
         // Create a label.
         response = new Label("DicePoker");
+        response.setId("intro");
 
 
         // Create two push buttons.
-        Button btnNewGame = new Button("New Game");
-        //TODO -- Make load button -- //
-        Button btnRules = new Button("Rules");
-        Button btnQuit = new Button("Quit");
 
-        btnQuit.centerShapeProperty();
+        Button btnNewGame = new Button("New Game");
+        btnNewGame.getStyleClass().add("buttonMain");
+        Button btnLoad = new Button("Load Game");
+        btnLoad.getStyleClass().add("buttonMain");
+        Button btnRules = new Button("Rules");
+        btnRules.getStyleClass().add("buttonMain");
+        Button btnQuit = new Button("Quit");
+        btnQuit.getStyleClass().add("buttonMain");
+
+
 
         mainMenuGrid.add(response, 0,1);
         mainMenuGrid.add(btnNewGame,0,2);
-        mainMenuGrid.add(btnRules,0,3);
-        mainMenuGrid.add(btnQuit,0,4);
+        mainMenuGrid.add(btnLoad,0,3);
+        mainMenuGrid.add(btnRules,0,4);
+        mainMenuGrid.add(btnQuit,0,5);
 
         // Handle the action events for the New Game Button
         btnNewGame.setOnAction(new EventHandler<ActionEvent>() {
@@ -69,16 +74,25 @@ public class MainGUI extends Application {
 
         });
 
-        // Handle the action events for the Rules button.
-        btnRules.setOnAction(new EventHandler<ActionEvent>() {
+        //Handle the action events for the Load Game Button
+        btnLoad.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent ae) {
-                response.setText("You pressed Down.");
+                response.setText("You pressed Load Game.");
             }
             //TODO -- Sett action til ny scene --//
 
         });
 
-        // Handle the action events for the New Game Button
+        // Handle the action events for the Rules button.
+        btnRules.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent ae) {
+                response.setText("You pressed Rules.");
+            }
+            //TODO -- Sett action til ny scene --//
+
+        });
+
+        // Handle the action events for the Quit Button
         btnQuit.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent ae) {
                 System.exit(0);
