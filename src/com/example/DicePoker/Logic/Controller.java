@@ -6,6 +6,4 @@ public class Controller {
     Player player3 = new Player("Heidi",10);
     Player player4 = new Player("Sebastian",10);
 
-
-
 }

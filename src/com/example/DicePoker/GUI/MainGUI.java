@@ -3,13 +3,19 @@ package com.example.DicePoker.GUI;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MainGUI extends Application {
 
@@ -22,7 +28,7 @@ public class MainGUI extends Application {
     @Override
     public void start(Stage myStage) {
         // Give the stage a title.
-        myStage.setTitle("Use JavaFX Buttons and Events.");
+        myStage.setTitle("DICE POKER");
 
         // Use a FlowPane for the root node. In this case,
         // vertical and horizontal gaps of 10.
@@ -68,8 +74,9 @@ public class MainGUI extends Application {
         // Handle the action events for the New Game Button
         btnNewGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent ae) {
-                response.setText("You pressed New Game.");
+                RegisterPlayers();
             }
+
             //TODO -- Sett action til ny scene -- //
 
         });
@@ -86,7 +93,7 @@ public class MainGUI extends Application {
         // Handle the action events for the Rules button.
         btnRules.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent ae) {
-                response.setText("You pressed Rules.");
+                Rules();
             }
             //TODO -- Sett action til ny scene --//
 
@@ -105,7 +112,40 @@ public class MainGUI extends Application {
 
         // Show the stage and its scene.
         myStage.show();
+    }
 
+    @FXML
+    public void RegisterPlayers(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RegisterPlayers.fxml"));
+            Parent player = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Welcome to new player creation page");
+            stage.setScene(new Scene(player,400,300));
+            stage.show();
+        } catch (IOException e){
+            System.out.println("Could not load the page");
+            e.printStackTrace();
+            return;
+        }
+    }
 
+    @FXML
+    public void Rules(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Rules.fxml"));
+            Parent rules = fxmlLoader.load();
+            Stage stage = new Stage();
+
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("DicePoker Rules");
+            stage.setScene(new Scene(rules,500,400));
+            stage.show();
+        } catch (IOException e){
+            System.out.println("Could not load the page");
+            e.printStackTrace();
+            return;
+        }
     }
 }
