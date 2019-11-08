@@ -3,7 +3,7 @@
 }
 
 .buttonMain{
-    -fx-text-fill: #000000;
+    -fx-text-fill: #000001;
     -fx-background-color: #009933;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
@@ -13,7 +13,7 @@
 
 #intro{
   -fx-font: bold 25pt "Arial";
-  -fx-text-fill: #00000;
+  -fx-text-fill: #000000;
 
   }
 
