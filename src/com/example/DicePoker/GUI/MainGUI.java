@@ -41,7 +41,7 @@ public class MainGUI extends Application {
         rootNode.setAlignment(Pos.CENTER);
 
         // Create a scene.
-        Scene myScene = new Scene(rootNode, 200, 300);
+        Scene myScene = new Scene(rootNode, 400, 500);
         myScene.getStylesheets().add("com.example.DicePoker.css");
 
         // Set the scene on the stage.
@@ -50,18 +50,23 @@ public class MainGUI extends Application {
         // Create a label.
         response = new Label("DicePoker");
         response.setId("intro");
+        response.setTranslateY(-75);
 
 
         // Create two push buttons.
 
         Button btnNewGame = new Button("New Game");
         btnNewGame.getStyleClass().add("buttonMain");
+        btnNewGame.setStyle("-fx-text-fill: #ffe6e6;");
         Button btnLoad = new Button("Load Game");
         btnLoad.getStyleClass().add("buttonMain");
+        btnLoad.setStyle("-fx-text-fill: #ffe6e6;");
         Button btnRules = new Button("Rules");
         btnRules.getStyleClass().add("buttonMain");
+        btnRules.setStyle("-fx-text-fill: #ffe6e6;");
         Button btnQuit = new Button("Quit");
         btnQuit.getStyleClass().add("buttonMain");
+        btnQuit.setStyle("-fx-text-fill: #ffe6e6;");
 
 
 

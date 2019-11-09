@@ -1,21 +1,22 @@
 .root{
     -fx-font: bold 14pt "Arial";
-    -fx-text-fill: #000000;
+    -fx-text-fill: #ffe6e6;
+    -fx-background-color: #ccffff;
 
 
 }
 
 .button{
-    -fx-text-fill: #000001;
-    -fx-background-color: #009933;
+
+    -fx-background-color: #004d00;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
     -fx-padding: 10px 24px;
-    -fx-pref-width: 150px;
+    -fx-pref-width: 250px;
 }
 
 #intro{
-  -fx-font: bold 25pt "Arial";
+  -fx-font: bold 40pt "Arial";
   -fx-text-fill: #000000;
 
   }
