@@ -97,7 +97,7 @@
                                     <Font name="Arial Bold" size="12.800000190734863" />
                                  </font></Label>
                            </children></AnchorPane>
-                      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="140.0" prefWidth="193.0" style="-fx-background-color: #ff6666;">
+                      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="140.0" prefWidth="193.0" style="-fx-background-color: #ccffff;">
                            <children>
                               <Label alignment="CENTER" layoutX="76.0" layoutY="46.0" text="Här ska vi ha POT">
                                  <font>
@@ -121,20 +121,14 @@
                                        </font>
                                        <opaqueInsets>
                                           <Insets />
-                                       </opaqueInsets>
-                                       <effect>
-                                          <Glow level="0.6" />
-                                       </effect></Button>
-                                    <Button alignment="CENTER" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="25.0" minWidth="75.0" mnemonicParsing="false" opacity="0.7" prefHeight="20.0" prefWidth="75.0" style="-fx-background-color: #004d00;" text="FOLD" textAlignment="RIGHT" textFill="#ffe6e6" GridPane.columnIndex="1">
+                                       </opaqueInsets></Button>
+                                    <Button alignment="CENTER" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="25.0" minWidth="75.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="75.0" style="-fx-background-color: #004d00;" text="FOLD" textAlignment="RIGHT" textFill="#ffe6e6" GridPane.columnIndex="1">
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font>
                                        <GridPane.margin>
                                           <Insets />
-                                       </GridPane.margin>
-                                       <effect>
-                                          <InnerShadow />
-                                       </effect></Button>
+                                       </GridPane.margin></Button>
                                  </children>
                               </GridPane>
                            </children></AnchorPane>
@@ -149,6 +143,9 @@
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>
+                                       <effect>
+                                          <Glow level="0.7" />
+                                       </effect>
                                     </Button>
                                     <GridPane alignment="TOP_CENTER" gridLinesVisible="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                        <columnConstraints>
