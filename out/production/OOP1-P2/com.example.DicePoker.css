@@ -1,8 +1,11 @@
 .root{
+    -fx-font: bold 14pt "Arial";
+    -fx-text-fill: #000000;
+
 
 }
 
-.buttonMain{
+.button{
     -fx-text-fill: #000001;
     -fx-background-color: #009933;
     -fx-border-radius: 20;

@@ -76,9 +76,6 @@ public class MainGUI extends Application {
             public void handle(ActionEvent ae) {
                 RegisterPlayers();
             }
-
-            //TODO -- Sett action til ny scene -- //
-
         });
 
         //Handle the action events for the Load Game Button
@@ -95,7 +92,6 @@ public class MainGUI extends Application {
             public void handle(ActionEvent ae) {
                 Rules();
             }
-            //TODO -- Sett action til ny scene --//
 
         });
 
@@ -123,6 +119,7 @@ public class MainGUI extends Application {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Welcome to new player creation page");
             stage.setScene(new Scene(player,400,300));
+            player.getStylesheets().add("com.example.DicePoker.css");
             stage.show();
         } catch (IOException e){
             System.out.println("Could not load the page");
@@ -141,6 +138,7 @@ public class MainGUI extends Application {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("DicePoker Rules");
             stage.setScene(new Scene(rules,500,400));
+            rules.getStylesheets().add("com.example.DicePoker.css");
             stage.show();
         } catch (IOException e){
             System.out.println("Could not load the page");
