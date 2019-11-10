@@ -1,4 +1,4 @@
-package com.example.DicePoker.Testing;
+ package com.example.DicePoker.Testing;
 
 import com.example.DicePoker.Logic.Controller;
 import org.junit.Assert;

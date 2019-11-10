@@ -33,10 +33,10 @@
                                 <Insets bottom="5.0" />
                             </GridPane.margin>
                         </Label>
-                        <CheckBox alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.rowIndex="1" />
-                        <CheckBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.rowIndex="2" />
-                        <CheckBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.rowIndex="3" />
-                        <CheckBox alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="p1_check" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="p2_check" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="p3_check" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="p4_check" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.rowIndex="4" />
                         <Button fx:id="pc_human1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#changePlayer1Type" style="-fx-background-color: #004d00;" text="PC" textFill="#d80000" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <font>
                                 <Font name="Arial Bold" size="12.800000190734863" />
