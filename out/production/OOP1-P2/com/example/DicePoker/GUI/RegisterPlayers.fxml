@@ -27,7 +27,7 @@
                     <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="139.0" text="Players" textFill="#881a1a" GridPane.columnIndex="1">
                             <font>
-                                <Font name="System Bold" size="24.0" />
+                                <Font name="Noto Serif Bold" size="24.0" />
                             </font>
                             <GridPane.margin>
                                 <Insets bottom="5.0" />
@@ -109,7 +109,15 @@
                             <font>
                                 <Font name="Arial Bold" size="24.0" />
                             </font>
+                     <GridPane.margin>
+                        <Insets left="2.0" right="2.0" />
+                     </GridPane.margin>
                         </Button>
+                  <Label fx:id="warning_text" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Arial Bold" size="10.0" />
+                     </font>
+                  </Label>
                     </children>
                 </GridPane>
             </children></FlowPane>

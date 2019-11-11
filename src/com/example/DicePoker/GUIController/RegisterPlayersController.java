@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -23,6 +24,8 @@ public class RegisterPlayersController {
     @FXML
     private TextField name_pc_human1, name_pc_human2, name_pc_human3, name_pc_human4;
 
+    @FXML
+    private Label warning_text;
     @FXML
     private Button Start;
 
@@ -109,6 +112,8 @@ public class RegisterPlayersController {
                 e.printStackTrace();
                 return;
             }
+        } else {
+            warning_text.setText("Not enough players have \nnames and are ready");
         }
 
     }

@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -51,6 +52,7 @@ public class MainGUI extends Application {
         response = new Label("DicePoker");
         response.setId("intro");
         response.setTranslateY(-75);
+
 
 
         // Create two push buttons.
