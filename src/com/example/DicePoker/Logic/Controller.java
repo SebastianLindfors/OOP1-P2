@@ -6,18 +6,105 @@ import java.util.Map;
 
 public class Controller {
 
-    ArrayList<Player> playersInGame = new ArrayList<>(); //Stores all players in the game.
+    ArrayList<Player> playersAtStart = new ArrayList<>(); //Stores all players in the game at the start.
+    ArrayList<Player> playersInGame = new ArrayList<>();
 
-    int currentPlayer;
-    int firstPlayer;
+    final int STARTING_CHIPS = 100;
+
+    int currentAnte;
+    int currentPot;
+    int currentRound;
+
+    int currentPlayer = 0;
+    int firstPlayer = 0;
 
     public Controller(ArrayList<Player> playersInGame) {
 
-        this.playersInGame = playersInGame;
+        this.playersAtStart = playersInGame;
+
+
 
     }
 
+    public void startGame() {
 
+        for (Player player : playersAtStart) {
+            player.setMarker(STARTING_CHIPS);
+            playersInGame.add(player);
+        }
+
+        currentRound = 0;
+        mainGameLoop();
+    }
+
+
+    private void mainGameLoop() {
+
+        while (playersInGame.size() > 1) {
+
+            currentRound++; //Increase the round count TODO More round relared code here.
+
+            currentPot = 0;
+//            anteUp();
+
+            for (Player player : playersInGame) {
+                player.rollAllDice(); //TODO Update graphics here
+            }
+
+
+
+
+        }
+
+
+
+    }
+
+//    private void anteUp() {
+//
+//        currentPlayer = firstPlayer;
+//
+//        do  {
+//            currentPlayer.payChips(currentAnte);
+//            currentPot += currentAnte;
+//            currentPlayer = nextPlayer();
+//        } while (currentPlayer != firstPlayer);
+//
+//
+//    }
+//
+//    private void betting() {
+//
+//        int highestBet = 0;
+//        int[] playerBets = new int[playersInGame.size()];
+//
+//        currentPlayer = firstPlayer;
+//        while (playerBets[currentPlayer] != highestBet) {
+//            if (playerBets[currentPlayer] == -1) {
+//                currentPlayer = nextPlayer();
+//                continue;
+//            }
+//            if (currentPlayer.isHuman) {
+//                int playerChoice = 1;//TODO Get choice from GUI-Class.  0: Bet, 1: Call, 2: Fold
+//            }
+//            else {
+//                int playerChoice = 2;
+//                //TODO Code AI behaviour
+//            }
+//            if (playerChoice == 1) { //Player is betting
+//                    int betAmount = 1; //Todo Get amount from GUI
+//            }
+//            else if (playerChoice == 2) { //Player is calling
+//                int callingCost = highestBet - playerBets[currentPlayer];
+//                currentPlayer.payChips(callingCost);
+//                playerBets[currentPlayer] += callingCost;
+//                currentPot += callingCost;
+//            }
+//            else { //Player is folding
+//                playerBets[currentPlayer] = -1;
+//            }
+//        }
+//}
 
     public static int[] determineHandStrength (int[] diceHand) {
         /**
@@ -222,6 +309,10 @@ public class Controller {
         return output;
     }
 
+    private int nextPlayer() {
+        if (currentPlayer++ == playersInGame.size()) return 0;
+        else return currentPlayer++;
+    }
 
 
 //    Player player1 = new Player("Kamil",10, true);
