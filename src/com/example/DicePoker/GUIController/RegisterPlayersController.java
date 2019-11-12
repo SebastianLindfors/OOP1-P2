@@ -1,5 +1,6 @@
 package com.example.DicePoker.GUIController;
 
+import com.example.DicePoker.Logic.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class RegisterPlayersController {
+
+    Player player1, player2, player3, player4;
 
     int check = 0, min_player = 2;
 
@@ -174,6 +177,7 @@ public class RegisterPlayersController {
 
     @FXML
     public void startGame(){
+
         if (check >= 2) {
             try {
                 handleCloseWindow();
@@ -185,6 +189,43 @@ public class RegisterPlayersController {
                 stage.setTitle("DICE POKER");
                 stage.setScene(new Scene(startGame, 620, 480));
                 stage.show();
+
+                if(p1_check.isSelected()){
+                    if(name_pc_human1.getText().equals("CPU1")) {
+                        player1 = new Player(name_pc_human1.getText(), 100, false);
+                    } else{
+                        player1 = new Player(name_pc_human1.getText(), 100, true);
+                    }
+                }
+
+                if(p2_check.isSelected()) {
+                    if (name_pc_human2.getText().equals("CPU2")) {
+                        player2 = new Player(name_pc_human2.getText(), 100, false);
+                    } else {
+                        player2 = new Player(name_pc_human2.getText(), 100, true);
+                    }
+                }
+
+                if(p3_check.isSelected()) {
+                    if (name_pc_human3.getText().equals("CPU3")) {
+                        player3 = new Player(name_pc_human3.getText(), 100, false);
+                        //System.out.println(name_pc_human3.getText());
+                    } else {
+                        player3 = new Player(name_pc_human3.getText(), 100, true);
+                    }
+                }
+
+                if(p4_check.isSelected()) {
+                    if (name_pc_human4.getText().equals("CPU4")) {
+                        player4 = new Player(name_pc_human4.getText(), 100, false);
+                    } else {
+                        player4 = new Player(name_pc_human4.getText(), 100, true);
+                    }
+                }
+
+                GameController gameController = fxmlLoader.getController();
+                gameController.initialize(player1, player2, player3, player4);
+
             } catch (IOException e) {
                 System.out.println("Could not load the page");
                 e.printStackTrace();

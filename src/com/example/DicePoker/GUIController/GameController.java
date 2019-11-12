@@ -1,11 +1,15 @@
 package com.example.DicePoker.GUIController;
 
+import com.example.DicePoker.Logic.Player;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 
-import java.awt.*;
-
 public class GameController {
+
+    boolean turn = false;
 
     @FXML
     private ToggleButton die1, die2, die3, die4, die5;
@@ -26,10 +30,7 @@ public class GameController {
     private Label player1, player2, player3, player4;
 
     @FXML
-    private Label player_turn;
-
-    @FXML
-    private  Label pot_text;
+    private Label player_turn, pot_text;
 
     @FXML
     private TextField Bet_field;
@@ -44,16 +45,37 @@ public class GameController {
     private Button Roll, Reroll;
 
 
-    @FXML
-    public void playerName () {
-        if (name_pc_human1.getText().isEmpty()){} else {
-        player1.setText(name_pc_human1.getText());}
-        if (name_pc_human2.getText().isEmpty()){} else {
-            player1.setText(name_pc_human2.getText());}
-        if (name_pc_human3.getText().isEmpty()){} else {
-            player1.setText(name_pc_human3.getText());}
-        if (name_pc_human4.getText().isEmpty()){} else {
-            player1.setText(name_pc_human4.getText());}
+    public void initialize(Player p1, Player p2, Player p3, Player p4){
+
+        if(p1 != null){
+            player1.setText(p1.getName());
+            turn = true;
+            player_turn.setText(p1.getName());
+        }
+
+        if(p2 != null) {
+            player2.setText(p2.getName());
+            if(turn == false){
+                turn = true;
+                player_turn.setText(p2.getName());
+            }
+        }
+
+        if(p3 != null) {
+            player3.setText(p3.getName());
+            if(turn == false){
+                turn = true;
+                player_turn.setText(p3.getName());
+            }
+        }
+
+        if(p4 != null) {
+            player4.setText(p4.getName());
+            if(turn == false){
+                turn = true;
+                player_turn.setText(p4.getName());
+            }
+        }
 
     }
 }
