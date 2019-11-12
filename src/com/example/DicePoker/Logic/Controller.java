@@ -8,6 +8,7 @@ public class Controller {
 
     ArrayList<Player> playersAtStart = new ArrayList<>(); //Stores all players in the game at the start.
     ArrayList<Player> playersInGame = new ArrayList<>();
+    ArrayList<Player> playersInRound = new ArrayList<>()
 
     final int STARTING_CHIPS = 100;
 
@@ -21,8 +22,6 @@ public class Controller {
     public Controller(ArrayList<Player> playersInGame) {
 
         this.playersAtStart = playersInGame;
-
-
 
     }
 
@@ -51,61 +50,71 @@ public class Controller {
                 player.rollAllDice(); //TODO Update graphics here
             }
 
+            startBetting();
+
+            for (Player player : playersInRound) {
+                boolean[] rerollDie = new boolean[5];
+                //Todo Get choice of players die
+                player.rollSomeDie(rerollDie[0],rerollDie[1],rerollDie[2],;rerollDie[3], rerollDie[4]);
+            }
 
 
 
         }
 
+    }
+
+    private void anteUp() {
+
+        currentPlayer = firstPlayer;
+
+        do  {
+            currentPlayer.payChips(currentAnte);
+            currentPot += currentAnte;
+            currentPlayer = nextPlayer();
+        } while (currentPlayer != firstPlayer);
 
 
     }
 
-//    private void anteUp() {
-//
-//        currentPlayer = firstPlayer;
-//
-//        do  {
-//            currentPlayer.payChips(currentAnte);
-//            currentPot += currentAnte;
-//            currentPlayer = nextPlayer();
-//        } while (currentPlayer != firstPlayer);
-//
-//
-//    }
-//
-//    private void betting() {
-//
-//        int highestBet = 0;
-//        int[] playerBets = new int[playersInGame.size()];
-//
-//        currentPlayer = firstPlayer;
-//        while (playerBets[currentPlayer] != highestBet) {
-//            if (playerBets[currentPlayer] == -1) {
-//                currentPlayer = nextPlayer();
-//                continue;
-//            }
-//            if (currentPlayer.isHuman) {
-//                int playerChoice = 1;//TODO Get choice from GUI-Class.  0: Bet, 1: Call, 2: Fold
-//            }
-//            else {
-//                int playerChoice = 2;
-//                //TODO Code AI behaviour
-//            }
-//            if (playerChoice == 1) { //Player is betting
-//                    int betAmount = 1; //Todo Get amount from GUI
-//            }
-//            else if (playerChoice == 2) { //Player is calling
-//                int callingCost = highestBet - playerBets[currentPlayer];
-//                currentPlayer.payChips(callingCost);
-//                playerBets[currentPlayer] += callingCost;
-//                currentPot += callingCost;
-//            }
-//            else { //Player is folding
-//                playerBets[currentPlayer] = -1;
-//            }
-//        }
-//}
+    private void startBetting() {
 
+        int highestBet = 0;
+        int[] playerBets = new int[playersInGame.size()];
+
+        currentPlayer = firstPlayer;
+        while (playerBets[currentPlayer] != highestBet) {
+            if (playerBets[currentPlayer] == -1) {
+                currentPlayer = nextPlayer();
+                continue;
+            }
+            if (currentPlayer.isHuman) {
+                int playerChoice = 1;//TODO Get choice from GUI-Class.  0: Bet, 1: Call, 2: Fold
+            }
+            else {
+                int playerChoice = 2;
+                //TODO Code AI behaviour
+            }
+            if (playerChoice == 1) { //Player is betting
+                int betAmount = 1; //Todo Get amount from GUI
+            }
+            else if (playerChoice == 2) { //Player is calling
+                int callingCost = highestBet - playerBets[currentPlayer];
+                currentPlayer.payChips(callingCost);
+                playerBets[currentPlayer] += callingCost;
+                currentPot += callingCost;
+            }
+            else { //Player is folding
+                playerBets[currentPlayer] = -1;
+            }
+        }
+        for (Player player : playersInGame) {
+            if (!player.hasFolded) {
+                playersInRound.add(player);
+            }
+        }
+    }
+    
     public static int[] determineHandStrength (int[] diceHand) {
         /**
          * 0 = Nothing
@@ -142,19 +151,19 @@ public class Controller {
         int[] output = new int[5];
         switch (mostRolled) {
             case 5: //This means person has a Five of a Kind hand
-                    output[0] = 7;
-                    output [1] = mostRolledValue;
-                    break;
+                output[0] = 7;
+                output [1] = mostRolledValue;
+                break;
             case 4: //This means the player has a Four of a kind.
-                    output[0] = 6;
-                    output[1] = mostRolledValue;
-                    for (int value : dieValues.keySet()) {
-                        if (dieValues.get(value) == 1) {
-                            output[2] = value;
-                            break;
-                        }
+                output[0] = 6;
+                output[1] = mostRolledValue;
+                for (int value : dieValues.keySet()) {
+                    if (dieValues.get(value) == 1) {
+                        output[2] = value;
+                        break;
                     }
-                    break;
+                }
+                break;
             case 3: // This means the player has either Three of a Kind of a Full House.
                 int tiebreaker1 = -1;
                 for (int value : dieValues.keySet()) {
@@ -313,15 +322,5 @@ public class Controller {
         if (currentPlayer++ == playersInGame.size()) return 0;
         else return currentPlayer++;
     }
-
-
-//    Player player1 = new Player("Kamil",10, true);
-//    Player player2 = new Player("Nusret",10, true );
-//    Player player3 = new Player("Heidi",10,true );
-//    Player player4 = new Player("Sebastian",10, true);
-
-
-
-
 
 }
