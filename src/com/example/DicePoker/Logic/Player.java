@@ -9,8 +9,9 @@ public class Player {
     private ArrayList dices = new ArrayList();
     Die die1,die2, die3, die4, die5;
     boolean isHuman;
+    boolean folded = false, bet = false;
 
-    public Player(String name, int marker) {
+    public Player(String name, int marker, boolean isHuman) {
         this.name = name;
         this.marker = marker;
         this.isHuman = isHuman;
@@ -51,6 +52,22 @@ public class Player {
                 dices.add(dice[4]);
             }
 
+    }
+
+    public boolean isFolded() {
+        return folded;
+    }
+
+    public void setFolded(boolean folded) {
+        this.folded = folded;
+    }
+
+    public boolean isBet() {
+        return bet;
+    }
+
+    public void setBet(boolean bet) {
+        this.bet = bet;
     }
 
     public void rollAllDice() {
