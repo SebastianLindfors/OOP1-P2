@@ -1,8 +1,10 @@
- package com.example.DicePoker.Testing;
-
 import com.example.DicePoker.Logic.Controller;
+import com.example.DicePoker.Logic.Player;
+
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 
 public class ControllerTest {
@@ -143,6 +145,29 @@ public class ControllerTest {
         System.out.println(handStrengthOutput(expected, actual));
         Assert.assertArrayEquals( expected, actual);
 }
+
+    @Test
+    public void constructorTesting() {
+
+        ArrayList<Player> lop = new ArrayList<>();
+        lop.add(new Player("Sebbe",0,true));
+        lop.add(new Player("Nusret",0,true));
+
+        Controller testGame = new Controller(lop);
+        Assert.assertArrayEquals(testGame.getPlayerOrder(), new int[]{1,2});
+
+        lop.add(new Player("Kamil",0,true));
+
+        testGame = new Controller(lop);
+        Assert.assertArrayEquals(testGame.getPlayerOrder(), new int[]{1,2,3});
+
+        lop.add(new Player("Heidi",0,true));
+
+        testGame = new Controller(lop);
+        Assert.assertArrayEquals(testGame.getPlayerOrder(), new int[]{1,2,3,4});
+
+
+    }
 
 private String handStrengthOutput(int[] expected, int [] actual) {
         StringBuilder string1 = new StringBuilder();

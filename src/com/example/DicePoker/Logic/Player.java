@@ -53,6 +53,7 @@ public class Player {
             }
 
     }
+    public boolean isHuman() { return isHuman; }
 
     public boolean isFolded() {
         return folded;
@@ -108,5 +109,17 @@ public class Player {
 
     public void setDice(int[] dice) {
         this.dice = dice;
+    }
+
+    public boolean payMarker(int payment) {
+
+        if (this.marker - payment > 0) {
+            marker -= payment;
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 }

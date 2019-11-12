@@ -6,11 +6,15 @@ import java.util.Map;
 
 public class Controller {
 
+    final int STARTING_CHIPS = 100;
+
+
+
+    Map<Integer, Player> playerByNumber = new HashMap<>();
+
     ArrayList<Player> playersAtStart = new ArrayList<>(); //Stores all players in the game at the start.
     ArrayList<Player> playersInGame = new ArrayList<>();
-    ArrayList<Player> playersInRound = new ArrayList<>()
-
-    final int STARTING_CHIPS = 100;
+    ArrayList<Player> playersInRound = new ArrayList<>();
 
     int currentAnte;
     int currentPot;
@@ -19,9 +23,15 @@ public class Controller {
     int currentPlayer = 0;
     int firstPlayer = 0;
 
-    public Controller(ArrayList<Player> playersInGame) {
+    int[] playerOrder;
 
-        this.playersAtStart = playersInGame;
+    public Controller(ArrayList<Player> listOfPlayers) {
+        int playerNumbers = 1;
+        playerOrder = new int[listOfPlayers.size()];
+        for (Player player : listOfPlayers) {
+            playerByNumber.put(playerNumbers++, player);
+            playerOrder[playerNumbers - 2] = playerNumbers - 1;
+        }
 
     }
 
@@ -32,6 +42,7 @@ public class Controller {
             playersInGame.add(player);
         }
 
+        firstPlayer = 0;
         currentRound = 0;
         mainGameLoop();
     }
@@ -44,18 +55,18 @@ public class Controller {
             currentRound++; //Increase the round count TODO More round relared code here.
 
             currentPot = 0;
-//            anteUp();
+            anteUp();
 
             for (Player player : playersInGame) {
                 player.rollAllDice(); //TODO Update graphics here
             }
 
-            startBetting();
+//            startBetting();
 
             for (Player player : playersInRound) {
                 boolean[] rerollDie = new boolean[5];
                 //Todo Get choice of players die
-                player.rollSomeDie(rerollDie[0],rerollDie[1],rerollDie[2],;rerollDie[3], rerollDie[4]);
+                player.rollSomeDie(rerollDie[0],rerollDie[1],rerollDie[2],rerollDie[3], rerollDie[4]);
             }
 
 
@@ -69,7 +80,7 @@ public class Controller {
         currentPlayer = firstPlayer;
 
         do  {
-            currentPlayer.payChips(currentAnte);
+            playerByNumber.get(currentPlayer).payMarker(currentAnte);
             currentPot += currentAnte;
             currentPlayer = nextPlayer();
         } while (currentPlayer != firstPlayer);
@@ -84,15 +95,18 @@ public class Controller {
 
         currentPlayer = firstPlayer;
         while (playerBets[currentPlayer] != highestBet) {
+
+            int playerChoice = -1;
+
             if (playerBets[currentPlayer] == -1) {
                 currentPlayer = nextPlayer();
                 continue;
             }
-            if (currentPlayer.isHuman) {
-                int playerChoice = 1;//TODO Get choice from GUI-Class.  0: Bet, 1: Call, 2: Fold
+            if (playerByNumber.get(currentPlayer).isHuman) {
+                playerChoice = 1;//TODO Get choice from GUI-Class.  0: Bet, 1: Call, 2: Fold
             }
             else {
-                int playerChoice = 2;
+                playerChoice = 2;
                 //TODO Code AI behaviour
             }
             if (playerChoice == 1) { //Player is betting
@@ -100,7 +114,7 @@ public class Controller {
             }
             else if (playerChoice == 2) { //Player is calling
                 int callingCost = highestBet - playerBets[currentPlayer];
-                currentPlayer.payChips(callingCost);
+                playerByNumber.get(currentPlayer).payMarker(callingCost);
                 playerBets[currentPlayer] += callingCost;
                 currentPot += callingCost;
             }
@@ -109,7 +123,7 @@ public class Controller {
             }
         }
         for (Player player : playersInGame) {
-            if (!player.hasFolded) {
+            if (!player.isFolded()) {
                 playersInRound.add(player);
             }
         }
@@ -321,6 +335,10 @@ public class Controller {
     private int nextPlayer() {
         if (currentPlayer++ == playersInGame.size()) return 0;
         else return currentPlayer++;
+    }
+
+    public int[] getPlayerOrder() {
+        return this.playerOrder;
     }
 
 }
