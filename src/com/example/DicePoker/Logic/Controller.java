@@ -61,7 +61,7 @@ public class Controller {
                 player.rollAllDice(); //TODO Update graphics here
             }
 
-//            startBetting();
+                startBetting();
 
             for (Player player : playersInRound) {
                 boolean[] rerollDie = new boolean[5];
@@ -331,6 +331,7 @@ public class Controller {
         }
         return output;
     }
+
 
     private int nextPlayer() {
         if (currentPlayer++ == playersInGame.size()) return 0;
