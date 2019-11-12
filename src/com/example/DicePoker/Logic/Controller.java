@@ -50,12 +50,12 @@ public class Controller {
                 player.rollAllDice(); //TODO Update graphics here
             }
 
-            startBetting();
+            //startBetting();
 
             for (Player player : playersInRound) {
                 boolean[] rerollDie = new boolean[5];
                 //Todo Get choice of players die
-                player.rollSomeDie(rerollDie[0],rerollDie[1],rerollDie[2],;rerollDie[3], rerollDie[4]);
+                player.rollSomeDie(rerollDie[0],rerollDie[1],rerollDie[2],rerollDie[3], rerollDie[4]);
             }
 
 
@@ -63,7 +63,7 @@ public class Controller {
         }
 
     }
-
+/*
     private void anteUp() {
 
         currentPlayer = firstPlayer;
@@ -114,7 +114,7 @@ public class Controller {
             }
         }
     }
-
+*/
     public static int[] determineHandStrength (int[] diceHand) {
         /**
          * 0 = Nothing
@@ -317,6 +317,7 @@ public class Controller {
         }
         return output;
     }
+
 
     private int nextPlayer() {
         if (currentPlayer++ == playersInGame.size()) return 0;
