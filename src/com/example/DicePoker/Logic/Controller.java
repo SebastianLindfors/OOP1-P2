@@ -8,7 +8,7 @@ public class Controller {
 
     ArrayList<Player> playersAtStart = new ArrayList<>(); //Stores all players in the game at the start.
     ArrayList<Player> playersInGame = new ArrayList<>();
-    ArrayList<Player> playersInRound = new ArrayList<>()
+    ArrayList<Player> playersInRound = new ArrayList<>();
 
     final int STARTING_CHIPS = 100;
 
