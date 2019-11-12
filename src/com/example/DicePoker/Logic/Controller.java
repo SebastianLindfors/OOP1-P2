@@ -114,7 +114,7 @@ public class Controller {
             }
         }
     }
-    
+
     public static int[] determineHandStrength (int[] diceHand) {
         /**
          * 0 = Nothing
