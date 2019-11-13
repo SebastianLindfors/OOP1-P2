@@ -1,0 +1,39 @@
+.dice1 {
+    -fx-background-image: url("/Dices/1.PNG");
+    -fx-background-size: 35px 31px;
+    -fx-background-repeat: no-repeat;
+}
+.dice2 {
+    -fx-background-image: url("/Dices/2.PNG");
+    -fx-background-size: 35px 31px;
+    -fx-background-repeat: no-repeat;
+}
+
+.dice3 {
+    -fx-background-image: url("/Dices/3.PNG");
+    -fx-background-size: 35px 31px;
+    -fx-background-repeat: no-repeat;
+}
+
+.dice4 {
+    -fx-background-image: url("/Dices/4.PNG");
+    -fx-background-size: 35px 31px;
+    -fx-background-repeat: no-repeat;
+}
+
+.dice5 {
+    -fx-background-image: url("/Dices/5.PNG");
+    -fx-background-size: 35px 31px;
+    -fx-background-repeat: no-repeat;
+}
+
+.dice6 {
+    -fx-background-image: url("/Dices/6.PNG");
+    -fx-background-size: 35px 31px;
+    -fx-background-repeat: no-repeat;
+}
+
+.diceBlank{
+
+    padding: 10px 10px;
+}

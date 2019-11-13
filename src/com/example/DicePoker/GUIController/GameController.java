@@ -50,14 +50,14 @@ public class GameController {
         if(p1 != null){
             player1.setText(p1.getName());
             turn = true;
-            player_turn.setText(p1.getName());
+            player_turn.setText(p1.getName() + " turn");
         }
 
         if(p2 != null) {
             player2.setText(p2.getName());
             if(turn == false){
                 turn = true;
-                player_turn.setText(p2.getName());
+                player_turn.setText(p2.getName() + " turn");
             }
         }
 
@@ -65,7 +65,7 @@ public class GameController {
             player3.setText(p3.getName());
             if(turn == false){
                 turn = true;
-                player_turn.setText(p3.getName());
+                player_turn.setText(p3.getName() + " turn");
             }
         }
 
@@ -73,9 +73,14 @@ public class GameController {
             player4.setText(p4.getName());
             if(turn == false){
                 turn = true;
-                player_turn.setText(p4.getName());
+                player_turn.setText(p4.getName() + " turn");
             }
         }
+    }
+
+    public void Roll(){
+
 
     }
+
 }

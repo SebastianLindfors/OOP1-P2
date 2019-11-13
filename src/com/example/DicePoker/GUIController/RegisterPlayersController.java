@@ -193,7 +193,7 @@ public class RegisterPlayersController {
                 if(p1_check.isSelected()){
                     if(name_pc_human1.getText().equals("CPU1")) {
                         player1 = new Player(name_pc_human1.getText(), 100, false);
-                    } else{
+                    } else {
                         player1 = new Player(name_pc_human1.getText(), 100, true);
                     }
                 }

@@ -4,8 +4,6 @@
     -fx-background-color: #ccffff;
 }
 
-
-
 .button{
     -fx-background-color: #004d00;
     -fx-border-radius: 20;
@@ -17,8 +15,6 @@
 #intro{
   -fx-font: bold 36pt "Noto Serif";
   -fx-text-fill: #881a1a;
-  }
-
-
+}
 
 
