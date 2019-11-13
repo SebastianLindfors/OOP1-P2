@@ -147,7 +147,83 @@ public class ControllerTest {
         actual = Controller.determineHandStrength(inputHand);
         System.out.println(handStrengthOutput(expected, actual));
         Assert.assertArrayEquals( expected, actual);
+
+        //Nothing test 1.
+        inputHand   = new int[]{1,2,3,5,6};
+        expected    = new int[]{0,4,0,0,0};
+        actual = Controller.determineHandStrength(inputHand);
+        System.out.println(handStrengthOutput(expected, actual));
+        Assert.assertArrayEquals( expected, actual);
+
+        //Nothing test 2.
+        inputHand   = new int[]{1,2,3,4,6};
+        expected    = new int[]{0,5,0,0,0};
+        actual = Controller.determineHandStrength(inputHand);
+        System.out.println(handStrengthOutput(expected, actual));
+        Assert.assertArrayEquals( expected, actual);
 }
+
+    @Test
+    public void compareHandStrengthTest() {
+
+        int[] hand1 = {7,6,0,0,0};
+        int[] hand2 = {0,3,0,0,0};
+        Boolean result = Controller.compareHandStrength(hand1,hand2);
+        Boolean expected = true;
+        System.out.println("Excpeted: " + expected + "\t| Actual: " + result);
+        Assert.assertEquals(result, expected);
+
+        hand2 = new int[]{7,6,0,0,0};
+        hand1= new int[]{0,3,0,0,0};
+        result = Controller.compareHandStrength(hand1,hand2);
+        expected = false;
+        System.out.println("Excpeted: " + expected + "\t| Actual: " + result);
+        Assert.assertEquals(result, expected);
+
+        hand1 = new int[]{0,4,0,0,0};
+        hand2= new int[]{0,3,0,0,0};
+        result = Controller.compareHandStrength(hand1,hand2);
+        expected = false;
+        System.out.println("Excpeted: " + expected + "\t| Actual: " + result);
+        Assert.assertEquals(result, expected);
+
+        hand1 = new int[]{7,6,0,0,0};
+        hand2= new int[]{7,6,0,0,0};
+        result = Controller.compareHandStrength(hand1,hand2);
+        expected = false;
+        System.out.println("Excpeted: " + expected + "\t| Actual: " + result);
+        Assert.assertEquals(result, expected);
+
+        hand1 = new int[]{6,6,4,0,0};
+        hand2= new int[]{6,6,2,0,0};
+        result = Controller.compareHandStrength(hand1,hand2);
+        expected = true;
+        System.out.println("Excpeted: " + expected + "\t| Actual: " + result);
+        Assert.assertEquals(result, expected);
+
+        hand1 = new int[]{7,6,0,0,0};
+        hand2= new int[]{7,6,0,0,0};
+        result = Controller.compareHandStrength(hand1,hand2);
+        expected = false;
+        System.out.println("Excpeted: " + expected + "\t| Actual: " + result);
+        Assert.assertEquals(result, expected);
+
+
+    }
+
+    @Test
+    public void sortHandStrengthTest() {
+
+        int[] hand1 = {0,5,0,0,0}; // Rolled nothing, missing a 5.
+        int[] hand2 = {1,2,6,5,4}; // Rolled a pair of ones, 6,5,4 kickers.
+        int[] hand3 = {2,4,5,2,0}; // Rolled two pairs of 5s and 4s, with a 2 kicker.
+        int[] hand4 = {5,5,1,0,0}; // Rolled a full house 5s and 1s.
+
+        int[][] testHand = {hand1,hand2,hand3,hand4};
+        int[][] expectedHand = {hand4, hand3,hand2, hand1};
+        int[][] sortedHand = Controller.sortHandStrength(testHand);
+        Assert.assertArrayEquals(expectedHand, sortedHand);
+    }
 
     @Test
     public void constructorTesting() {
@@ -171,6 +247,8 @@ public class ControllerTest {
 
 
     }
+
+
 
 private String handStrengthOutput(int[] expected, int [] actual) {
         StringBuilder string1 = new StringBuilder();

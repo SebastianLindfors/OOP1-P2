@@ -69,6 +69,12 @@ public class Controller {
                 player.rollSomeDie(rerollDie[0],rerollDie[1],rerollDie[2],rerollDie[3], rerollDie[4]);
             }
 
+            for (Player player : playersInRound) {
+
+
+
+            }
+
 
 
         }
@@ -330,6 +336,46 @@ public class Controller {
                 break;
         }
         return output;
+    }
+
+    public static int[][] sortHandStrength(int[][] handStrength) {
+
+        int[][] output = handStrength;
+
+        for (int i = 1; i < output.length; i++ ) {
+            for (int j = i; j > 0; j-- ) {
+                if (compareHandStrength(output[j], output[j-1])) {
+                    int[] temp = output[j-1];
+                    output[j-1] = output[j];
+                    output[j] = temp;
+                }
+                else {
+                    break;
+                }
+            }
+
+        }
+        return output;
+
+    }
+
+    public static boolean compareHandStrength(int[] arg1, int[] arg2) { //Tests whether arg1 has a greater hand strength then hand 2.
+
+        if (arg1[0] > arg2[0]) { return true; }
+        else if(arg1[0] < arg2[0]){ return false; }
+        else {
+            if (arg1[0] == 0) {
+                if (arg1[1] < arg2[1]) { return true; }
+                else { return false; }
+            }
+            else {
+                for (int i = 1; i < 5; i++ ) {
+                   if (arg1[i] > arg2[i]) { return true; }
+                   else if(arg1[i] < arg2[i]){ return false; }
+                }
+                return false; //This case indicates a tie.
+            }
+        }
     }
 
 
