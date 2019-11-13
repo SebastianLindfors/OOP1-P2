@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Controller {
+public class GameEngine {
 
     final int STARTING_CHIPS = 100;
 
@@ -25,7 +25,7 @@ public class Controller {
 
     int[] playerOrder;
 
-    public Controller(ArrayList<Player> listOfPlayers) {
+    public GameEngine(ArrayList<Player> listOfPlayers) {
         int playerNumbers = 1;
         playerOrder = new int[listOfPlayers.size()];
         for (Player player : listOfPlayers) {
@@ -387,5 +387,25 @@ public class Controller {
     public int[] getPlayerOrder() {
         return this.playerOrder;
     }
+
+   public Player getCurrentPlayer() {
+        return playerByNumber.get(currentPlayer);
+   }
+
+   public int[] rollCurrentPlayer() {
+       playerByNumber.get(currentPlayer).rollAllDice();
+       int dieNumber = 0;
+       int[] output = new int[5];
+       for (Die die : playerByNumber.get(currentPlayer).getDice()) {
+           output[dieNumber++] = die.getCurrentFace();
+       }
+       return output;
+   }
+
+   public Player getPlayer(int playerNumber) {
+        return playerByNumber.get(playerNumber);
+   }
+
+
 
 }
