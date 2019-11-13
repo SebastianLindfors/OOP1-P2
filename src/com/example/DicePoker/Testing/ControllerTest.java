@@ -1,5 +1,5 @@
 
-package com.example.DicePoker.Testing;
+/* package com.example.DicePoker.Testing;
 
 import com.example.DicePoker.Logic.Controller;
 import com.example.DicePoker.Logic.Player;
@@ -185,4 +185,4 @@ private String handStrengthOutput(int[] expected, int [] actual) {
         return ("Expected: " + string1.toString() + " Actual: " +string2.toString());
     }
 
-}
+} */

@@ -38,10 +38,14 @@ public class RegisterPlayersController {
             pc_human1.setText("Human");
             name_pc_human1.setEditable(true);
             name_pc_human1.setText("");
+            check--;
         } else {
             pc_human1.setText("PC");
             name_pc_human1.setText("CPU1");
             name_pc_human1.setEditable(false);
+            if (check <=2) {
+                check++;
+            }
         }
     }
 
@@ -51,10 +55,14 @@ public class RegisterPlayersController {
             pc_human2.setText("Human");
             name_pc_human2.setEditable(true);
             name_pc_human2.setText("");
+            check--;
         } else {
             pc_human2.setText("PC");
-            name_pc_human2.setText("CPU1");
+            name_pc_human2.setText("CPU2");
             name_pc_human2.setEditable(false);
+            if (check <=2) {
+                check++;
+            }
         }
     }
 
@@ -64,10 +72,14 @@ public class RegisterPlayersController {
             pc_human3.setText("Human");
             name_pc_human3.setEditable(true);
             name_pc_human3.setText("");
+            check--;
         } else {
             pc_human3.setText("PC");
-            name_pc_human3.setText("CPU1");
+            name_pc_human3.setText("CPU3");
             name_pc_human3.setEditable(false);
+            if (check <=2) {
+                check++;
+            }
         }
     }
 
@@ -77,10 +89,14 @@ public class RegisterPlayersController {
             pc_human4.setText("Human");
             name_pc_human4.setEditable(true);
             name_pc_human4.setText("");
+            check--;
         } else {
             pc_human4.setText("PC");
-            name_pc_human4.setText("CPU1");
+            name_pc_human4.setText("CPU4");
             name_pc_human4.setEditable(false);
+            if (check <=2) {
+                check++;
+            }
         }
     }
 
