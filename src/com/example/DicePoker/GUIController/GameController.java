@@ -38,6 +38,9 @@ public class GameController {
     private Label player_turn, pot_text, p1_pot, p2_pot, p3_pot, p4_pot;
 
     @FXML
+    private Label PlayerPot[] = new Label[]{p1_mark,p2_mark,p3_mark,p4_mark};
+
+    @FXML
     private TextField Bet_field;
 
     @FXML
@@ -49,73 +52,99 @@ public class GameController {
     @FXML
     private Button Roll, Reroll;
 
-    ArrayList<Player> lop = new ArrayList<>();
+    @FXML
+    private ToggleButton Die1, Die2, Die3, Die4, Die5;
 
+    int startPosition = 0;
+
+    @FXML
+    private ToggleButton Dices[] = {Die1, Die2, Die3, Die4, Die5};
 
     public void initialize(Player p1, Player p2, Player p3, Player p4){
 
-//        ArrayList<Player> lop = new ArrayList<>();
+        ArrayList<Player> lop = new ArrayList<>();
         lop.add(p1);
         lop.add(p2);
         lop.add(p3);
         lop.add(p4);
         mainGame = new GameEngine(lop);
 
-        //----------------NNew Round-------------------------//
+        if(p1 != null){
+            startPosition = 1;
+            player1.setText(p1.getName());
+            turn = true;
+            p1_mark.setText(String.valueOf(p1.getMarker()));
+            player_turn.setText(p1.getName() + " turn");
+        }
 
-        mainGame.anteUp();
+        if(p2 != null) {
+            startPosition = 2;
+            player2.setText(p2.getName());
+            p2_mark.setText(String.valueOf(p2.getMarker()));
+            if(turn == false){
+                turn = true;
+                player_turn.setText(p2.getName() + " turn");
+            }
+        }
 
+        if(p3 != null) {
+            player3.setText(p3.getName());
+            p3_mark.setText(String.valueOf(p3.getMarker()));
+            if(turn == false){
+                turn = true;
+                player_turn.setText(p3.getName() + " turn");
+            }
+        }
 
-
-
-
-
-//        if(p1 != null){
-//            player1.setText(p1.getName());
-//            turn = true;
-//            player_turn.setText(p1.getName() + " turn");
-//        }
-//
-//        if(p2 != null) {
-//            player2.setText(p2.getName());
-//            if(turn == false){
-//                turn = true;
-//                player_turn.setText(p2.getName() + " turn");
-//            }
-//        }
-//
-//        if(p3 != null) {
-//            player3.setText(p3.getName());
-//            if(turn == false){
-//                turn = true;
-//                player_turn.setText(p3.getName() + " turn");
-//            }
-//        }
-//
-//        if(p4 != null) {
-//            player4.setText(p4.getName());
-//            if(turn == false){
-//                turn = true;
-//                player_turn.setText(p4.getName() + " turn");
-//          }
-//        }
+        if(p4 != null) {
+            player4.setText(p4.getName());
+            p4_mark.setText(String.valueOf(p4.getMarker()));
+            if(turn == false){
+                turn = true;
+                player_turn.setText(p4.getName() + " turn");
+          }
+        }
+        pot_text.setText(String.valueOf(mainGame.getCurrentPot()));
     }
 
     public void Roll(){
 
+        Player currentPlayer = mainGame.getCurrentPlayer();
+        int diceValues[] = mainGame.rollCurrentPlayer();
+
+        for(int i=0; i<diceValues.length; i++) {
+           if(diceValues[i] == 1){
+               Dices[i].getStyleClass().add("dice1");
+           } else if(diceValues[i] == 2){
+               Dices[i].getStyleClass().add("dice2");
+           }else if(diceValues[i] == 3){
+               Dices[i].getStyleClass().add("dice3");
+           }else if(diceValues[i] == 4){
+               Dices[i].getStyleClass().add("dice4");
+           }else if(diceValues[i] == 5){
+               Dices[i].getStyleClass().add("dice5");
+           }
+
+        }
+
 
     }
 
-    private void UpdateBoardState() {
-        ArrayList<Player> allPlayers = mainGame.getListOfAllPlayers();
-
-        p1_mark.setText(String.valueOf(lop.get(0).getMarker()));
-        p2_mark.setText(String.valueOf(lop.get(1).getMarker()));
-        p3_mark.setText(String.valueOf(lop.get(2).getMarker()));
-        p4_mark.setText(String.valueOf(lop.get(3).getMarker()));
-
-        pot_text.setText(String.valueOf(mainGame.getCurrentPot()));
-    }
+//    private void UpdateBoardState() {
+//        ArrayList<Player> allPlayers = mainGame.getListOfAllPlayers();
+//
+//
+//        int number = 0;
+//        for (Player player : allPlayers){
+//            System.out.println(player.getName() + " " + number);
+//
+//            PlayerPot[number].setText("Mer Moo");
+//            //p1_mark.setText(String.valueOf(player.getMarker()));
+//            number++;
+//        }
+//
+//        pot_text.setText(String.valueOf(mainGame.getCurrentPot()));
+//    }
 
 
 

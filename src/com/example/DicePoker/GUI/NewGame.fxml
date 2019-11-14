@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DicePoker.GUIController.GameController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DicePoker.GUIController.GameController">
    <children>
       <SplitPane dividerPositions="0.2976588628762542, 0.6755852842809364" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -220,7 +228,7 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <ToggleButton fx:id="Die1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" />
+                                          <ToggleButton fx:id="Die1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" stylesheets="@../../../../com.example.Dices.css" />
                                           <ToggleButton fx:id="Die2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.columnIndex="1" />
                                           <ToggleButton fx:id="Die3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="      " GridPane.columnIndex="2" />
                                           <ToggleButton fx:id="Die4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.columnIndex="3" />
@@ -293,7 +301,7 @@
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font></Label>
-                                    <Label fx:id="player41" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="214.0" text="Mark:" textFill="#abbb00">
+                                    <Label fx:id="p4_mark" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="214.0" text="Mark:" textFill="#abbb00">
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font>
