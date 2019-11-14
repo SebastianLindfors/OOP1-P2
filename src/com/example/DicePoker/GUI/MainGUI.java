@@ -127,7 +127,7 @@ public class MainGUI extends Application {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Welcome to new player creation page");
             stage.setScene(new Scene(player,400,300));
-            player.getStylesheets().add("com.example.DicePoker.css");
+            player.getStylesheets().setAll("com.example.DicePoker.css");
             stage.show();
         } catch (IOException e){
             System.out.println("Could not load the page");

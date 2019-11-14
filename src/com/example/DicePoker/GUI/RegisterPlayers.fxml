@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DicePoker.GUIController.RegisterPlayersController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DicePoker.GUIController.RegisterPlayersController">
     <children>
-        <FlowPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #ccffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <FlowPane id="pane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #ccffff;" stylesheets="@../../../../com.example.DicePoker.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="272.0" prefWidth="372.0" style="-fx-background-color: #ccffff;">
+                <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="272.0" prefWidth="372.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="77.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="161.0" />
@@ -32,69 +32,52 @@
                         <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="139.0" text="Players" textFill="#881a1a" GridPane.columnIndex="1">
-                            <font>
-                                <Font name="Noto Serif Bold" size="24.0" />
-                            </font>
+                        <Label id="smallheadline" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="71.0" prefWidth="173.0" stylesheets="@../../../../com.example.DicePoker.css" text="Players" textFill="#881a1a" GridPane.columnIndex="1">
                             <GridPane.margin>
                                 <Insets bottom="5.0" />
                             </GridPane.margin>
                         </Label>
-                        <CheckBox fx:id="p1_check" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.rowIndex="1" onMouseClicked="#player1Unlock"/>
-                        <CheckBox fx:id="p2_check" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.rowIndex="2" onMouseClicked="#player2Unlock"/>
-                        <CheckBox fx:id="p3_check" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.rowIndex="3" onMouseClicked="#player3Unlock"/>
-                        <CheckBox fx:id="p4_check" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.rowIndex="4" onMouseClicked="#player4Unlock"/>
-                        <Button fx:id="pc_human1" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#changePlayer1Type" style="-fx-background-color: #004d00;" text="PC" textFill="#d80000" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <font>
-                                <Font name="Arial Bold" size="12.800000190734863" />
-                            </font>
+                        <CheckBox fx:id="p1_check" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#player1Unlock" stylesheets="@../../../../com.example.DicePoker.css" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="p2_check" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#player2Unlock" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="p3_check" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#player3Unlock" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="p4_check" alignment="CENTER" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#player4Unlock" GridPane.rowIndex="4" />
+                        <Button id=".button" fx:id="pc_human1" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#changePlayer1Type" style="-fx-background-color: #004d00;" stylesheets="@../../../../com.example.DicePoker.css" text="PC" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <GridPane.margin>
                                 <Insets bottom="2.5" top="2.5" />
                             </GridPane.margin>
                      <padding>
                         <Insets bottom="2.5" top="2.5" />
                      </padding></Button>
-                        <Button fx:id="pc_human2" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#changePlayer2Type" style="-fx-background-color: #004d00;" text="PC" textFill="#2306fb" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                            <font>
-                                <Font name="Arial Bold" size="12.800000190734863" />
-                            </font>
+                        <Button fx:id="pc_human2" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#changePlayer2Type" style="-fx-background-color: #004d00;" text="PC" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <GridPane.margin>
                                 <Insets bottom="2.5" top="2.5" />
                             </GridPane.margin>
                      <padding>
                         <Insets bottom="2.5" top="2.5" />
                      </padding></Button>
-                        <Button fx:id="pc_human3" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#changePlayer3Type" style="-fx-background-color: #004d00;" text="PC" textFill="#00d018" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Button fx:id="pc_human3" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#changePlayer3Type" style="-fx-background-color: #004d00;" stylesheets="@../../../../com.example.DicePoker.css" text="PC" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <GridPane.margin>
                                 <Insets bottom="2.5" top="2.5" />
                             </GridPane.margin>
-                            <font>
-                                <Font name="Arial Bold" size="12.800000190734863" />
-                            </font>
                      <padding>
                         <Insets bottom="2.5" top="2.5" />
                      </padding></Button>
-                        <Button fx:id="pc_human4" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#changePlayer4Type" style="-fx-background-color: #004d00;" text="PC" textFill="#e6fb00" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Button fx:id="pc_human4" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#changePlayer4Type" style="-fx-background-color: #004d00;" stylesheets="@../../../../com.example.DicePoker.css" text="PC" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                             <GridPane.margin>
                                 <Insets bottom="2.5" top="2.5" />
                             </GridPane.margin>
-                            <font>
-                                <Font name="Arial Bold" size="12.800000190734863" />
-                            </font>
                      <padding>
                         <Insets bottom="2.5" top="2.5" />
                      </padding></Button>
-                        <TextField fx:id="name_pc_human1" disable="true" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="CPU1" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <TextField fx:id="name_pc_human1" disable="true" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../../../com.example.DicePoker.css" text="CPU1" GridPane.columnIndex="2" GridPane.rowIndex="1">
                             <GridPane.margin>
                                 <Insets left="10.0" />
                             </GridPane.margin>
                      <padding>
                         <Insets bottom="2.5" top="2.5" />
                      </padding>
-                     <font>
-                        <Font size="10.0" />
-                     </font></TextField>
-                        <TextField fx:id="name_pc_human2" disable="true" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="CPU2" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    </TextField>
+                        <TextField fx:id="name_pc_human2" disable="true" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../../../com.example.DicePoker.css" text="CPU2" GridPane.columnIndex="2" GridPane.rowIndex="2">
                             <GridPane.margin>
                                 <Insets left="10.0" />
                             </GridPane.margin>
@@ -124,10 +107,7 @@
                      <font>
                         <Font size="10.0" />
                      </font></TextField>
-                        <Button fx:id="Start" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#startGame" prefHeight="38.0" prefWidth="158.0" style="-fx-background-color: #004d00;" text="Start" textFill="#ffe6e6" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                            <font>
-                                <Font name="Arial Bold" size="24.0" />
-                            </font>
+                        <Button fx:id="Start" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#startGame" prefHeight="38.0" prefWidth="158.0" style="-fx-background-color: #004d00;" stylesheets="@../../../../com.example.DicePoker.css" text="Start" textFill="#ffe6e6" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="2.0" right="2.0" />
                      </GridPane.margin>
