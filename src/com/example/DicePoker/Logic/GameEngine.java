@@ -7,6 +7,7 @@ import java.util.Map;
 public class GameEngine {
 
     final int STARTING_CHIPS = 100;
+    final int STARTING_ANTE  = 10;
 
 
 
@@ -14,7 +15,12 @@ public class GameEngine {
 
     ArrayList<Player> playersAtStart = new ArrayList<>(); //Stores all players in the game at the start.
     ArrayList<Player> playersInGame = new ArrayList<>(); //Stores all players still in game.
-    ArrayList<Player> playersInRound = new ArrayList<>();
+    ArrayList<Player> playersInRound = new ArrayList<>(); //Stores all players that are still in a given round.
+
+    ArrayList<Integer> masterPlayerOrder = new ArrayList<>();
+    ArrayList<Integer> gamePlayerOrder = new ArrayList<>();
+    ArrayList<Integer> RoundPlayerOrder = new ArrayList<>();
+
 
     int currentAnte;
     int currentPot;
@@ -30,73 +36,34 @@ public class GameEngine {
         int playerNumbers = 1;
         playerOrder = new int[listOfPlayers.size()];
         for (Player player : listOfPlayers) {
+            masterPlayerOrder.add(playerNumbers);
             playerByNumber.put(playerNumbers++, player);
             playerOrder[playerNumbers - 2] = playerNumbers - 1;
 
-            playersInGame = new ArrayList<>(listOfPlayers);
         }
+        playersAtStart = new ArrayList<>(listOfPlayers);
+        playersInGame = new ArrayList<>(listOfPlayers);
 
+        currentAnte = STARTING_ANTE;
     }
 
-    public void startGame() {
-
-        for (Player player : playersAtStart) {
-            player.setMarker(STARTING_CHIPS);
-            playersInGame.add(player);
-        }
-
-        firstPlayer = 0;
-        currentRound = 0;
-        mainGameLoop();
-    }
-
-
-    private void mainGameLoop() {
-
-        while (playersInGame.size() > 1) {
-
-            currentRound++; //Increase the round count TODO More round relared code here.
-
-            currentPot = 0;
-            anteUp();
-
-            for (Player player : playersInGame) {
-                player.rollAllDice(); //TODO Update graphics here
-            }
-
-                startBetting();
-
-            for (Player player : playersInRound) {
-                boolean[] rerollDie = new boolean[5];
-                //Todo Get choice of players die
-                player.rollSomeDie(rerollDie[0],rerollDie[1],rerollDie[2],rerollDie[3], rerollDie[4]);
-            }
-
-            for (Player player : playersInRound) {
-
-
-
-            }
-
-
-
-        }
-
-    }
 
     public void anteUp() {
 
-        for(Player player : playersInGame) {
-            if (player.payMarker(currentAnte)) {
+        currentPlayer = firstPlayer;
+        do {
+            if (playerByNumber.get(currentPlayer).payMarker(currentAnte)) {
                 currentPot += currentAnte;
             }
             else {
-
+                //TODO All IN / Player elimination code here.
             }
-        }
+            nextPlayer();
+        } while (currentPlayer != firstPlayer);
+
 
     }
-
+    
     private void startBetting() {
 
         int highestBet = 0;
@@ -387,8 +354,8 @@ public class GameEngine {
         else return currentPlayer++;
     }
 
-    public int[] getPlayerOrder() {
-        return this.playerOrder;
+    public ArrayList<Integer> getPlayerOrder() {
+        return this.masterPlayerOrder;
     }
 
    public Player getCurrentPlayer() {
@@ -414,9 +381,36 @@ public class GameEngine {
         return playerByNumber.get(playerNumber);
    }
 
+   public int getCurrentPot() {return currentPot;}
+
    public ArrayList<Player> getListOfAllPlayers() {
        return playersInGame;
     }
+
+    public void newRound() {
+
+       currentRound++;
+       if (currentRound % 5 == 0) {
+           currentAnte += 10;
+       }
+       nextFirstPlayer();
+
+       currentPot = 0;
+
+
+    }
+
+    public void nextFirstPlayer() {
+
+       if (firstPlayer + 1 >= gamePlayerOrder.size()) {
+           firstPlayer = 0;
+       }
+       else {
+           firstPlayer++;
+       }
+    }
+
+
 
 
 

@@ -105,7 +105,7 @@ public class GameController {
 
     private void UpdateBoardState() {
         ArrayList<Player> allPlayers = mainGame.getListOfAllPlayers();
-        
+
 
     }
 
