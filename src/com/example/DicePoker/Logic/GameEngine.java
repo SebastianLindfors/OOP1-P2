@@ -26,8 +26,8 @@ public class GameEngine {
     int currentPot;
     int currentRound;
 
-    int currentPlayer = 0;
-    int firstPlayer = 0;
+    int currentPlayerPointer = 0;
+    int firstPlayerPointer = 0;
 
     int[] playerOrder;
 
@@ -37,74 +37,37 @@ public class GameEngine {
         playerOrder = new int[listOfPlayers.size()];
         for (Player player : listOfPlayers) {
             if (player == null) {
-             continue;
+                playerNumbers++;
+                continue;
             }
             masterPlayerOrder.add(playerNumbers);
+            gamePlayerOrder.add(playerNumbers);
             playerByNumber.put(playerNumbers++, player);
             playerOrder[playerNumbers - 2] = playerNumbers - 1;
             playersAtStart.add(player);
             playersInGame.add(player);
         }
 
+        firstPlayerPointer = 0;
+        currentPlayerPointer = 0;
+
+        currentPot = 0;
+
+
+
 
         currentAnte = STARTING_ANTE;
     }
 
+    public boolean currentPlayerPayAnte() {
 
-    public void anteUp() {
-
-        currentPlayer = firstPlayer;
-        do {
-            if (playerByNumber.get(currentPlayer).payMarker(currentAnte)) {
-                currentPot += currentAnte;
-            }
-            else {
-                //TODO All IN / Player elimination code here.
-            }
-            nextPlayer();
-        } while (currentPlayer != firstPlayer);
-
-
-    }
-
-    private void startBetting() {
-
-        int highestBet = 0;
-        int[] playerBets = new int[playersInGame.size()];
-
-        currentPlayer = firstPlayer;
-        while (playerBets[currentPlayer] != highestBet) {
-
-            int playerChoice = -1;
-
-            if (playerBets[currentPlayer] == -1) {
-                currentPlayer = nextPlayer();
-                continue;
-            }
-            if (playerByNumber.get(currentPlayer).isHuman) {
-                playerChoice = 1;//TODO Get choice from GUI-Class.  0: Bet, 1: Call, 2: Fold
-            }
-            else {
-                playerChoice = 2;
-                //TODO Code AI behaviour
-            }
-            if (playerChoice == 1) { //Player is betting
-                int betAmount = 1; //Todo Get amount from GUI
-            }
-            else if (playerChoice == 2) { //Player is calling
-                int callingCost = highestBet - playerBets[currentPlayer];
-                playerByNumber.get(currentPlayer).payMarker(callingCost);
-                playerBets[currentPlayer] += callingCost;
-                currentPot += callingCost;
-            }
-            else { //Player is folding
-                playerBets[currentPlayer] = -1;
-            }
+        Player cp = playerByNumber.get(gamePlayerOrder.get(currentPlayerPointer));
+        if (cp.payMarker(currentAnte)) {
+            currentPot += currentAnte;
+            return true;
         }
-        for (Player player : playersInGame) {
-            if (!player.isFolded()) {
-                playersInRound.add(player);
-            }
+        else {
+            return false;
         }
     }
 
@@ -353,8 +316,8 @@ public class GameEngine {
 
 
     private int nextPlayer() {
-        if (currentPlayer++ == playersInGame.size()) return 0;
-        else return currentPlayer++;
+        if (currentPlayerPointer++ == playersInGame.size()) return 0;
+        else return currentPlayerPointer++;
     }
 
     public ArrayList<Integer> getPlayerOrder() {
@@ -362,7 +325,7 @@ public class GameEngine {
     }
 
    public Player getCurrentPlayer() {
-        return playerByNumber.get(currentPlayer);
+        return playerByNumber.get(gamePlayerOrder.get(currentPlayerPointer));
    }
 
     /**
@@ -371,10 +334,10 @@ public class GameEngine {
      * @return Returns an array of integers corresponding to the values of the rolled dice.
      */
    public int[] rollCurrentPlayer() {
-       playerByNumber.get(currentPlayer).rollAllDice();
+       playerByNumber.get(gamePlayerOrder.get(currentPlayerPointer)).rollAllDice();
        int dieNumber = 0;
        int[] output = new int[5];
-       for (Die die : playerByNumber.get(currentPlayer).getDice()) {
+       for (Die die : playerByNumber.get(gamePlayerOrder.get(currentPlayerPointer)).getDice()) {
            output[dieNumber++] = die.getCurrentFace();
        }
        return output;
@@ -409,11 +372,11 @@ public class GameEngine {
 
     public void nextFirstPlayer() {
 
-       if (firstPlayer + 1 >= gamePlayerOrder.size()) {
-           firstPlayer = 0;
+       if (firstPlayerPointer + 1 >= gamePlayerOrder.size()) {
+           firstPlayerPointer = 0;
        }
        else {
-           firstPlayer++;
+           firstPlayerPointer++;
        }
     }
 

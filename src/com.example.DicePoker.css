@@ -16,10 +16,11 @@
     -fx-background-radius: 20;
     -fx-padding: 10px 24px;
     -fx-pref-width: 250px;
+
 }
 
 .button:hover{
-  -fx-background-color: #318D31;
+  -fx-background-color: #004000;
 }
 
 #intro{
@@ -30,6 +31,12 @@
 
 #smallheadline{
   -fx-font: bold 30pt "Big Caslon";
+  -fx-text-fill: #FFDF00;
+  -fx-effect: dropshadow(three-pass-box, black, 1, 0, 0, 1);
+}
+
+#smallerheadline{
+  -fx-font: bold 12pt "Big Caslon";
   -fx-text-fill: #FFDF00;
   -fx-effect: dropshadow(three-pass-box, black, 1, 0, 0, 1);
 }

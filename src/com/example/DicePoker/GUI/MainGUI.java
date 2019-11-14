@@ -52,7 +52,7 @@ public class MainGUI extends Application {
         // Create a label.
         response = new Label("DicePoker");
         response.setId("intro");
-        response.setTranslateY(-50);
+        response.setTranslateY(-30);
 
 
 
