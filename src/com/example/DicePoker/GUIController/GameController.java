@@ -69,6 +69,7 @@ public class GameController {
 
 
 
+
 //        if(p1 != null){
 //            player1.setText(p1.getName());
 //            turn = true;

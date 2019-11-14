@@ -36,13 +36,16 @@ public class GameEngine {
         int playerNumbers = 1;
         playerOrder = new int[listOfPlayers.size()];
         for (Player player : listOfPlayers) {
+            if (player == null) {
+             continue;
+            }
             masterPlayerOrder.add(playerNumbers);
             playerByNumber.put(playerNumbers++, player);
             playerOrder[playerNumbers - 2] = playerNumbers - 1;
-
+            playersAtStart.add(player);
+            playersInGame.add(player);
         }
-        playersAtStart = new ArrayList<>(listOfPlayers);
-        playersInGame = new ArrayList<>(listOfPlayers);
+
 
         currentAnte = STARTING_ANTE;
     }
@@ -63,7 +66,7 @@ public class GameEngine {
 
 
     }
-    
+
     private void startBetting() {
 
         int highestBet = 0;
@@ -387,6 +390,10 @@ public class GameEngine {
        return playersInGame;
     }
 
+    /**
+     * This method updates the state of the game to start a new round.
+     *
+     */
     public void newRound() {
 
        currentRound++;
