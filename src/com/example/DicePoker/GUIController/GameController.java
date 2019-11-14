@@ -107,6 +107,7 @@ public class GameController {
 
     private void UpdateBoardState() {
         ArrayList<Player> allPlayers = mainGame.getListOfAllPlayers();
+
         p1_mark.setText(String.valueOf(lop.get(0).getMarker()));
         p2_mark.setText(String.valueOf(lop.get(1).getMarker()));
         p3_mark.setText(String.valueOf(lop.get(2).getMarker()));

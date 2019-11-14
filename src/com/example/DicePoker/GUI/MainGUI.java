@@ -40,6 +40,7 @@ public class MainGUI extends Application {
 
         // Center the controls in the scene.
         rootNode.setAlignment(Pos.CENTER);
+        rootNode.setId("pane");
 
         // Create a scene.
         Scene myScene = new Scene(rootNode, 400, 500);
@@ -51,7 +52,7 @@ public class MainGUI extends Application {
         // Create a label.
         response = new Label("DicePoker");
         response.setId("intro");
-        response.setTranslateY(-75);
+        response.setTranslateY(-50);
 
 
 
