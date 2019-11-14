@@ -89,7 +89,7 @@ public class MainGUI extends Application {
         //Handle the action events for the Load Game Button
         btnLoad.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent ae) {
-                response.setText("You pressed Load Game.");
+                response.setText("Load Game.");
             }
             //TODO -- Sett action til ny scene --//
 
