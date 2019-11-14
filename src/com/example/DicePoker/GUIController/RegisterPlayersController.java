@@ -37,15 +37,11 @@ public class RegisterPlayersController {
         if (pc_human1.getText().equals("PC")) {
             pc_human1.setText("Human");
             name_pc_human1.setEditable(true);
-            name_pc_human1.setText("");
-            check--;
+            name_pc_human1.setText("Player 1");
         } else {
             pc_human1.setText("PC");
             name_pc_human1.setText("CPU1");
             name_pc_human1.setEditable(false);
-            if (check <=2) {
-                check++;
-            }
         }
     }
 
@@ -54,15 +50,11 @@ public class RegisterPlayersController {
         if (pc_human2.getText().equals("PC")) {
             pc_human2.setText("Human");
             name_pc_human2.setEditable(true);
-            name_pc_human2.setText("");
-            check--;
+            name_pc_human2.setText("Player 2");
         } else {
             pc_human2.setText("PC");
             name_pc_human2.setText("CPU2");
             name_pc_human2.setEditable(false);
-            if (check <=2) {
-                check++;
-            }
         }
     }
 
@@ -71,15 +63,11 @@ public class RegisterPlayersController {
         if (pc_human3.getText().equals("PC")) {
             pc_human3.setText("Human");
             name_pc_human3.setEditable(true);
-            name_pc_human3.setText("");
-            check--;
+            name_pc_human3.setText("Player 3");
         } else {
             pc_human3.setText("PC");
             name_pc_human3.setText("CPU3");
             name_pc_human3.setEditable(false);
-            if (check <=2) {
-                check++;
-            }
         }
     }
 
@@ -88,15 +76,11 @@ public class RegisterPlayersController {
         if (pc_human4.getText().equals("PC")) {
             pc_human4.setText("Human");
             name_pc_human4.setEditable(true);
-            name_pc_human4.setText("");
-            check--;
+            name_pc_human4.setText("Player 4");
         } else {
             pc_human4.setText("PC");
             name_pc_human4.setText("CPU4");
             name_pc_human4.setEditable(false);
-            if (check <=2) {
-                check++;
-            }
         }
     }
 
