@@ -1,20 +1,31 @@
 .root{
-    -fx-font: bold 14pt "Arial";
-    -fx-text-fill: #ffe6e6;
-    -fx-background-color: #ccffff;
+    -fx-font: bold 10pt "Arial";
+
 }
 
+
+#pane{
+    -fx-background-image: url("Background.jpg");
+
+}
+
+
 .button{
-    -fx-background-color: #004d00;
+    -fx-background-color: #027C02;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
     -fx-padding: 10px 24px;
     -fx-pref-width: 250px;
 }
 
+.button:hover{
+  -fx-background-color: #318D31;
+}
+
 #intro{
-  -fx-font: bold 36pt "Noto Serif";
-  -fx-text-fill: #881a1a;
+  -fx-font: bold 42pt "Big Caslon";
+  -fx-text-fill: #FFDF00;
+  -fx-effect: dropshadow(three-pass-box, black, 1, 0, 0, 1);
 }
 
 
