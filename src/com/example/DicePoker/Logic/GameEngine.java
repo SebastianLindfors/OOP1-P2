@@ -13,7 +13,7 @@ public class GameEngine {
     Map<Integer, Player> playerByNumber = new HashMap<>();
 
     ArrayList<Player> playersAtStart = new ArrayList<>(); //Stores all players in the game at the start.
-    ArrayList<Player> playersInGame = new ArrayList<>();
+    ArrayList<Player> playersInGame = new ArrayList<>(); //Stores all players still in game.
     ArrayList<Player> playersInRound = new ArrayList<>();
 
     int currentAnte;
@@ -26,11 +26,14 @@ public class GameEngine {
     int[] playerOrder;
 
     public GameEngine(ArrayList<Player> listOfPlayers) {
+
         int playerNumbers = 1;
         playerOrder = new int[listOfPlayers.size()];
         for (Player player : listOfPlayers) {
             playerByNumber.put(playerNumbers++, player);
             playerOrder[playerNumbers - 2] = playerNumbers - 1;
+
+            playersInGame = new ArrayList<>(listOfPlayers);
         }
 
     }
@@ -81,16 +84,16 @@ public class GameEngine {
 
     }
 
-    private void anteUp() {
+    public void anteUp() {
 
-        currentPlayer = firstPlayer;
+        for(Player player : playersInGame) {
+            if (player.payMarker(currentAnte)) {
+                currentPot += currentAnte;
+            }
+            else {
 
-        do  {
-            playerByNumber.get(currentPlayer).payMarker(currentAnte);
-            currentPot += currentAnte;
-            currentPlayer = nextPlayer();
-        } while (currentPlayer != firstPlayer);
-
+            }
+        }
 
     }
 
@@ -392,6 +395,11 @@ public class GameEngine {
         return playerByNumber.get(currentPlayer);
    }
 
+    /**
+     * This function rolls all the dice held by the current player, and returns the new values.
+     *
+     * @return Returns an array of integers corresponding to the values of the rolled dice.
+     */
    public int[] rollCurrentPlayer() {
        playerByNumber.get(currentPlayer).rollAllDice();
        int dieNumber = 0;
@@ -405,6 +413,10 @@ public class GameEngine {
    public Player getPlayer(int playerNumber) {
         return playerByNumber.get(playerNumber);
    }
+
+   public ArrayList<Player> getListOfAllPlayers() {
+       return playersInGame;
+    }
 
 
 

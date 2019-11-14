@@ -1,5 +1,6 @@
 package com.example.DicePoker.GUIController;
 
+import com.example.DicePoker.Logic.GameEngine;
 import com.example.DicePoker.Logic.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,9 +8,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 
+import java.util.ArrayList;
+
 public class GameController {
 
     boolean turn = false;
+
+    GameEngine  mainGame;
 
     @FXML
     private ToggleButton die1, die2, die3, die4, die5;
@@ -47,41 +52,63 @@ public class GameController {
 
     public void initialize(Player p1, Player p2, Player p3, Player p4){
 
-        if(p1 != null){
-            player1.setText(p1.getName());
-            turn = true;
-            player_turn.setText(p1.getName() + " turn");
-        }
+        ArrayList<Player> lop = new ArrayList<>();
+        lop.add(p1);
+        lop.add(p2);
+        lop.add(p3);
+        lop.add(p4);
+        mainGame = new GameEngine(lop);
 
-        if(p2 != null) {
-            player2.setText(p2.getName());
-            if(turn == false){
-                turn = true;
-                player_turn.setText(p2.getName() + " turn");
-            }
-        }
+        //----------------NNew Round-------------------------//
 
-        if(p3 != null) {
-            player3.setText(p3.getName());
-            if(turn == false){
-                turn = true;
-                player_turn.setText(p3.getName() + " turn");
-            }
-        }
+        mainGame.anteUp();
 
-        if(p4 != null) {
-            player4.setText(p4.getName());
-            if(turn == false){
-                turn = true;
-                player_turn.setText(p4.getName() + " turn");
-            }
-        }
+
+
+
+
+//        if(p1 != null){
+//            player1.setText(p1.getName());
+//            turn = true;
+//            player_turn.setText(p1.getName() + " turn");
+//        }
+//
+//        if(p2 != null) {
+//            player2.setText(p2.getName());
+//            if(turn == false){
+//                turn = true;
+//                player_turn.setText(p2.getName() + " turn");
+//            }
+//        }
+//
+//        if(p3 != null) {
+//            player3.setText(p3.getName());
+//            if(turn == false){
+//                turn = true;
+//                player_turn.setText(p3.getName() + " turn");
+//            }
+//        }
+//
+//        if(p4 != null) {
+//            player4.setText(p4.getName());
+//            if(turn == false){
+//                turn = true;
+//                player_turn.setText(p4.getName() + " turn");
+//          }
+//        }
     }
 
     public void Roll(){
 
 
     }
+
+    private void UpdateBoardState() {
+        ArrayList<Player> allPlayers = mainGame.getListOfAllPlayers();
+        
+
+    }
+
 
 
 }
