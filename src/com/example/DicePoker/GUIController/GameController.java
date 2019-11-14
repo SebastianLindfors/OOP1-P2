@@ -19,6 +19,7 @@ public class GameController {
     @FXML
     private ToggleButton die1, die2, die3, die4, die5;
 
+
     @FXML
     private Button p1_die1, p1_die2, p1_die3, p1_die4, p1_die5;
 
@@ -55,12 +56,21 @@ public class GameController {
     @FXML
     private ToggleButton Die1, Die2, Die3, Die4, Die5;
 
+
+    public ToggleButton[] Dices;
+
     int startPosition = 0;
 
     @FXML
-    private ToggleButton Dices[] = {Die1, Die2, Die3, Die4, Die5};
-
     public void initialize(Player p1, Player p2, Player p3, Player p4){
+
+        Dices = new ToggleButton[5];
+
+        Dices[0] = Die1;
+        Dices[1] = Die2;
+        Dices[2] = Die3;
+        Dices[3] = Die4;
+        Dices[4] = Die5;
 
         ArrayList<Player> lop = new ArrayList<>();
         lop.add(p1);
@@ -112,19 +122,21 @@ public class GameController {
         Player currentPlayer = mainGame.getCurrentPlayer();
         int diceValues[] = mainGame.rollCurrentPlayer();
 
-        for(int i=0; i<diceValues.length; i++) {
+        for(int i=0; i< diceValues.length; i++) {
+            System.out.println(i + ": " + diceValues[i]);
            if(diceValues[i] == 1){
                Dices[i].getStyleClass().add("dice1");
            } else if(diceValues[i] == 2){
                Dices[i].getStyleClass().add("dice2");
-           }else if(diceValues[i] == 3){
+           } else if(diceValues[i] == 3){
                Dices[i].getStyleClass().add("dice3");
-           }else if(diceValues[i] == 4){
+           } else if(diceValues[i] == 4){
                Dices[i].getStyleClass().add("dice4");
-           }else if(diceValues[i] == 5){
+           } else if(diceValues[i] == 5){
                Dices[i].getStyleClass().add("dice5");
+           } else if(diceValues[i] == 6){
+               Dices[i].getStyleClass().add("dice6");
            }
-
         }
 
 

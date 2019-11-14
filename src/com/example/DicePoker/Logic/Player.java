@@ -22,10 +22,10 @@ public class Player {
         die5 = new Die(6);
 
         dice.add(die1);
-        dice.add(die1);
-        dice.add(die1);
-        dice.add(die1);
-        dice.add(die1);
+        dice.add(die2);
+        dice.add(die3);
+        dice.add(die4);
+        dice.add(die5);
 
     }
 

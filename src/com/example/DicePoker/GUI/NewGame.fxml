@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DicePoker.GUIController.GameController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DicePoker.GUIController.GameController">
 
    <children>
       <SplitPane dividerPositions="0.2976588628762542, 0.6755852842809364" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -230,10 +230,10 @@
                                        </rowConstraints>
                                        <children>
                                           <ToggleButton fx:id="Die1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" stylesheets="@../../../../com.example.Dices.css" />
-                                          <ToggleButton fx:id="Die2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.columnIndex="1" />
-                                          <ToggleButton fx:id="Die3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="      " GridPane.columnIndex="2" />
-                                          <ToggleButton fx:id="Die4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.columnIndex="3" />
-                                          <ToggleButton fx:id="Die5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.columnIndex="4" />
+                                          <ToggleButton fx:id="Die2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" stylesheets="@../../../../com.example.Dices.css" GridPane.columnIndex="1" />
+                                          <ToggleButton fx:id="Die3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" stylesheets="@../../../../com.example.Dices.css" text="      " GridPane.columnIndex="2" />
+                                          <ToggleButton fx:id="Die4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" stylesheets="@../../../../com.example.Dices.css" GridPane.columnIndex="3" />
+                                          <ToggleButton fx:id="Die5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" stylesheets="@../../../../com.example.Dices.css" GridPane.columnIndex="4" />
                                        </children>
                                        <opaqueInsets>
                                           <Insets />
