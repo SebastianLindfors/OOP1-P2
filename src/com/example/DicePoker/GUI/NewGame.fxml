@@ -14,11 +14,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DicePoker.GUIController.GameController">
-=======
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DicePoker.GUIController.GameController">
->>>>>>> 3817bceeab383d158e9909466d1e874152f24f31
+
    <children>
       <SplitPane dividerPositions="0.2976588628762542, 0.6755852842809364" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -305,7 +302,6 @@
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font></Label>
-<<<<<<<
                                     <Label fx:id="p4_mark" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="214.0" text="Mark:" textFill="#abbb00">
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
