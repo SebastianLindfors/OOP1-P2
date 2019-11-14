@@ -32,10 +32,10 @@ public class GameController {
     private Button p4_die1, p4_die2, p4_die3, p4_die4, p4_die5;
 
     @FXML
-    private Label player1, player2, player3, player4;
+    private Label player1, player2, player3, player4, p1_mark, p2_mark, p3_mark, p4_mark;
 
     @FXML
-    private Label player_turn, pot_text;
+    private Label player_turn, pot_text, p1_pot, p2_pot, p3_pot, p4_pot;
 
     @FXML
     private TextField Bet_field;
@@ -49,10 +49,12 @@ public class GameController {
     @FXML
     private Button Roll, Reroll;
 
+    ArrayList<Player> lop = new ArrayList<>();
+
 
     public void initialize(Player p1, Player p2, Player p3, Player p4){
 
-        ArrayList<Player> lop = new ArrayList<>();
+//        ArrayList<Player> lop = new ArrayList<>();
         lop.add(p1);
         lop.add(p2);
         lop.add(p3);
@@ -105,8 +107,12 @@ public class GameController {
 
     private void UpdateBoardState() {
         ArrayList<Player> allPlayers = mainGame.getListOfAllPlayers();
-        
+        p1_mark.setText(String.valueOf(lop.get(0).getMarker()));
+        p2_mark.setText(String.valueOf(lop.get(1).getMarker()));
+        p3_mark.setText(String.valueOf(lop.get(2).getMarker()));
+        p4_mark.setText(String.valueOf(lop.get(3).getMarker()));
 
+        pot_text.setText(String.valueOf(mainGame.getCurrentPot()));
     }
 
 
