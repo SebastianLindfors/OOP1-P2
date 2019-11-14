@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DicePoker.GUIController.GameController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DicePoker.GUIController.GameController">
    <children>
       <SplitPane dividerPositions="0.2976588628762542, 0.6755852842809364" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -16,13 +24,13 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <VBox alignment="TOP_CENTER" layoutX="28.0" layoutY="-30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="195.0" prefWidth="185.0" style="-fx-background-color: #ccffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <VBox alignment="TOP_CENTER" layoutX="28.0" layoutY="-30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="195.0" prefWidth="185.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label fx:id="player1" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="173.0" text="Player1" textFill="#d80000">
+                                    <Label id="smallerheadline" fx:id="player1" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="173.0" stylesheets="@../../../../com.example.DicePoker.css" text="Player1" textFill="#d80000">
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font></Label>
-                                    <Label fx:id="p1_mark" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="173.0" text="Mark:" textFill="#d80000">
+                                    <Label fx:id="p1_mark" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="173.0" text="Mark:">
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font>
@@ -55,13 +63,13 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <VBox alignment="TOP_CENTER" prefHeight="195.0" prefWidth="173.0" style="-fx-background-color: #ccffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <VBox alignment="TOP_CENTER" prefHeight="195.0" prefWidth="173.0" style="-fx-background-color: #fffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label fx:id="player2" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="173.0" text="Player2" textFill="#2306fb">
+                                    <Label id="smallerheadline" fx:id="player2" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="173.0" stylesheets="@../../../../com.example.DicePoker.css" text="Player2" textFill="#2306fb">
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font></Label>
-                                    <Label fx:id="p2_mark" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="173.0" text="Mark:" textFill="#2306fb">
+                                    <Label fx:id="p2_mark" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="173.0" text="Mark:">
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font>
@@ -102,9 +110,9 @@
                     <items>
                       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="56.0" prefWidth="193.0">
                            <children>
-                              <Label fx:id="player_turn" alignment="CENTER" layoutX="69.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="56.0" prefWidth="193.0" style="-fx-background-color: #8cd98c;" text="Player1 turn" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Label id="smallheadline" fx:id="player_turn" alignment="CENTER" layoutX="69.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="56.0" prefWidth="193.0" style="-fx-background-color: #8cd98c;" stylesheets="@../../../../com.example.DicePoker.css" text="Player1 turn" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
-                                    <Font name="Arial Bold" size="12.800000190734863" />
+                                    <Font name="System Bold" size="12.800000190734863" />
                                  </font></Label>
                            </children></AnchorPane>
                       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="140.0" prefWidth="193.0" style="-fx-background-color: #8cd98c;">
@@ -248,13 +256,13 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="238.0" prefWidth="214.0">
                            <children>
-                              <VBox alignment="TOP_CENTER" layoutX="73.0" layoutY="-19.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="195.0" prefWidth="214.0" style="-fx-background-color: #ccffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <VBox alignment="TOP_CENTER" layoutX="73.0" layoutY="-19.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="195.0" prefWidth="214.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label fx:id="player3" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="214.0" text="Player3" textFill="#03a813">
+                                    <Label id="smallerheadline" fx:id="player3" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="214.0" stylesheets="@../../../../com.example.DicePoker.css" text="Player3" textFill="#03a813">
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font></Label>
-                                    <Label fx:id="p3_mark" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="214.0" text="Mark:" textFill="#03a813">
+                                    <Label fx:id="p3_mark" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="214.0" text="Mark:">
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font>
@@ -287,13 +295,13 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <VBox alignment="TOP_CENTER" layoutX="57.0" layoutY="-2.0" prefHeight="195.0" prefWidth="214.0" style="-fx-background-color: #ccffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <VBox alignment="TOP_CENTER" layoutX="57.0" layoutY="-2.0" prefHeight="195.0" prefWidth="214.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label fx:id="player4" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="214.0" text="Player4" textFill="#abbb00">
+                                    <Label id="smallerheadline" fx:id="player4" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="214.0" stylesheets="@../../../../com.example.DicePoker.css" text="Player4" textFill="#abbb00">
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font></Label>
-                                    <Label fx:id="player41" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="214.0" text="Mark:" textFill="#abbb00">
+                                    <Label fx:id="player41" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="214.0" text="Mark:">
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font>
