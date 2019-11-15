@@ -58,6 +58,13 @@ public class GameController {
 
 
     public ToggleButton[] Dices;
+    public Button[] P1Dice;
+    public Button[] P2Dice;
+    public Button[] P3Dice;
+    public Button[] P4Dice;
+
+    private Button[][] allPlayerDice;
+
 
     int startPosition = 0;
 
@@ -71,6 +78,37 @@ public class GameController {
         Dices[2] = Die3;
         Dices[3] = Die4;
         Dices[4] = Die5;
+
+        PlayerPot = new Label[4];
+        PlayerPot[0] = p1_mark;
+        PlayerPot[1] = p2_mark;
+        PlayerPot[2] = p3_mark;
+        PlayerPot[3] = p4_mark;
+
+        allPlayerDice = new Button[4][5];
+        allPlayerDice[0][0] = p1_die1;
+        allPlayerDice[0][1] = p1_die2;
+        allPlayerDice[0][2] = p1_die3;
+        allPlayerDice[0][3] = p1_die4;
+        allPlayerDice[0][4] = p1_die5;
+        allPlayerDice[1][0] = p2_die1;
+        allPlayerDice[1][1] = p2_die2;
+        allPlayerDice[1][2] = p2_die3;
+        allPlayerDice[1][3] = p2_die4;
+        allPlayerDice[1][4] = p2_die5;
+        allPlayerDice[2][0] = p3_die1;
+        allPlayerDice[2][0] = p3_die1;
+        allPlayerDice[2][1] = p3_die2;
+        allPlayerDice[2][2] = p3_die3;
+        allPlayerDice[2][3] = p3_die4;
+        allPlayerDice[2][4] = p3_die5;
+        allPlayerDice[3][0] = p4_die1;
+        allPlayerDice[3][0] = p4_die1;
+        allPlayerDice[3][1] = p4_die2;
+        allPlayerDice[3][2] = p4_die3;
+        allPlayerDice[3][3] = p4_die4;
+        allPlayerDice[3][4] = p4_die5;
+
 
         ArrayList<Player> lop = new ArrayList<>();
         lop.add(p1);
@@ -119,25 +157,35 @@ public class GameController {
 
     public void Roll(){
 
-        Player currentPlayer = mainGame.getCurrentPlayer();
-        int diceValues[] = mainGame.rollCurrentPlayer();
+        if (mainGame.currentPlayerPayAnte()) {
 
-        for(int i=0; i< diceValues.length; i++) {
-            System.out.println(i + ": " + diceValues[i]);
-           if(diceValues[i] == 1){
-               Dices[i].getStyleClass().add("dice1");
-           } else if(diceValues[i] == 2){
-               Dices[i].getStyleClass().add("dice2");
-           } else if(diceValues[i] == 3){
-               Dices[i].getStyleClass().add("dice3");
-           } else if(diceValues[i] == 4){
-               Dices[i].getStyleClass().add("dice4");
-           } else if(diceValues[i] == 5){
-               Dices[i].getStyleClass().add("dice5");
-           } else if(diceValues[i] == 6){
-               Dices[i].getStyleClass().add("dice6");
-           }
+            int diceValues[] = mainGame.rollCurrentPlayer();
+
+            for(int i=0; i< diceValues.length; i++) {
+
+                Dices[i].getStyleClass().clear();
+               if(diceValues[i] == 1){
+                   Dices[i].getStyleClass().add("dice1");
+               } else if(diceValues[i] == 2){
+                   Dices[i].getStyleClass().add("dice2");
+               } else if(diceValues[i] == 3){
+                   Dices[i].getStyleClass().add("dice3");
+               } else if(diceValues[i] == 4){
+                   Dices[i].getStyleClass().add("dice4");
+               } else if(diceValues[i] == 5){
+                   Dices[i].getStyleClass().add("dice5");
+               } else if(diceValues[i] == 6){
+                   Dices[i].getStyleClass().add("dice6");
+               }
+            }
+
+            int currentPlayerNumber = mainGame.getCurrentPlayerNumber();  //Current player number refers to which players graphics are to be updated.
+            System.out.println("Player Number: " + currentPlayerNumber);
+            updatePlayerDie(currentPlayerNumber);
+
+            updateMarkerAndPot(currentPlayerNumber);
         }
+        mainGame.nextPlayer();
 
 
     }
@@ -157,6 +205,36 @@ public class GameController {
 //
 //        pot_text.setText(String.valueOf(mainGame.getCurrentPot()));
 //    }
+
+    public void updatePlayerDie(int playerNumber) {
+
+        int[] playerDice = mainGame.getPlayer(playerNumber).getDieValues();
+
+        for (int i = 0; i < 5; i++) {
+            allPlayerDice[playerNumber - 1][i].getStyleClass().clear();
+            if(playerDice[i] == 1){
+                allPlayerDice[playerNumber - 1][i].getStyleClass().add("dice1");
+            } else if(playerDice[i] == 2){
+                allPlayerDice[playerNumber - 1][i].getStyleClass().add("dice2");
+            } else if(playerDice[i] == 3){
+                allPlayerDice[playerNumber - 1][i].getStyleClass().add("dice3");
+            } else if(playerDice[i] == 4){
+                allPlayerDice[playerNumber - 1][i].getStyleClass().add("dice4");
+            } else if(playerDice[i] == 5){
+                allPlayerDice[playerNumber - 1][i].getStyleClass().add("dice5");
+            } else if(playerDice[i] == 6){
+                allPlayerDice[playerNumber - 1][i].getStyleClass().add("dice6");
+            }
+        }
+
+
+
+    }
+
+    public void updateMarkerAndPot(int player) {
+        PlayerPot[player - 1].setText(String.valueOf(mainGame.getPlayer(player).getMarker()));
+        pot_text.setText(String.valueOf(mainGame.getCurrentPot()));
+    }
 
 
 

@@ -314,12 +314,6 @@ public class GameEngine {
         }
     }
 
-
-    private int nextPlayer() {
-        if (currentPlayerPointer++ == playersInGame.size()) return 0;
-        else return currentPlayerPointer++;
-    }
-
     public ArrayList<Integer> getPlayerOrder() {
         return this.masterPlayerOrder;
     }
@@ -378,6 +372,14 @@ public class GameEngine {
        else {
            firstPlayerPointer++;
        }
+    }
+
+    public int getCurrentPlayerNumber() {return gamePlayerOrder.get(currentPlayerPointer);}
+
+    public void nextPlayer() {
+
+        if (currentPlayerPointer + 1 == gamePlayerOrder.size()) { currentPlayerPointer = 0; }
+        else { currentPlayerPointer++; }
     }
 
 

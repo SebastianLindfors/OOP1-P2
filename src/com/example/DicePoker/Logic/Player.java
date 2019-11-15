@@ -75,8 +75,6 @@ public class Player {
 
     }
 
-
-
     public String getName() {
         return name;
     }
@@ -107,5 +105,16 @@ public class Player {
 
     public ArrayList<Die> getDice() {
         return dice;
+    }
+
+    public int[] getDieValues() {
+
+        int[] output = new int[5];
+        int i = 0;
+        for (Die die : dice) {
+            output[i++] = die.getCurrentFace();
+        }
+
+        return output;
     }
 }
