@@ -358,6 +358,7 @@ public class GameEngine {
            currentAnte += 10;
        }
        nextFirstPlayer();
+       currentPlayerPointer = firstPlayerPointer;
 
        currentPot = 0;
 
