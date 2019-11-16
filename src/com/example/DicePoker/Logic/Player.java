@@ -48,6 +48,7 @@ public class Player {
             }
 
     }
+
     public boolean isHuman() { return isHuman; }
 
     public boolean isFolded() {
@@ -91,7 +92,7 @@ public class Player {
         this.marker = marker;
     }
 
-    public boolean payMarker(int payment) {
+    public boolean payMarkerToPot(int payment) {
 
         if (this.marker - payment > 0) {
             marker -= payment;
@@ -116,5 +117,11 @@ public class Player {
         }
 
         return output;
+    }
+
+    public void payMarkerFromPot(int pot) {
+
+        this.marker += pot;
+
     }
 }

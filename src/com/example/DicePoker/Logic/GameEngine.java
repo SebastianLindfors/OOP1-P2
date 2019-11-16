@@ -19,7 +19,7 @@ public class GameEngine {
 
     ArrayList<Integer> masterPlayerOrder = new ArrayList<>();
     ArrayList<Integer> gamePlayerOrder = new ArrayList<>();
-    ArrayList<Integer> RoundPlayerOrder = new ArrayList<>();
+    ArrayList<Integer> roundPlayerOrder = new ArrayList<>();
 
 
     int currentAnte;
@@ -30,6 +30,9 @@ public class GameEngine {
     int firstPlayerPointer = 0;
 
     int[] playerOrder;
+
+    int[] playerBets = {0, 0, 0, 0};  //This array stores the total bet for all players in a round.
+    int largestBetPlayerNumber = 1; //This variable keeps track of which player currently has made the largest bet.
 
     public GameEngine(ArrayList<Player> listOfPlayers) {
 
@@ -42,6 +45,7 @@ public class GameEngine {
             }
             masterPlayerOrder.add(playerNumbers);
             gamePlayerOrder.add(playerNumbers);
+            roundPlayerOrder.add(playerNumbers);
             playerByNumber.put(playerNumbers++, player);
             playerOrder[playerNumbers - 2] = playerNumbers - 1;
             playersAtStart.add(player);
@@ -62,7 +66,7 @@ public class GameEngine {
     public boolean currentPlayerPayAnte() {
 
         Player cp = playerByNumber.get(gamePlayerOrder.get(currentPlayerPointer));
-        if (cp.payMarker(currentAnte)) {
+        if (cp.payMarkerToPot(currentAnte)) {
             currentPot += currentAnte;
             return true;
         }
@@ -359,8 +363,10 @@ public class GameEngine {
        }
        nextFirstPlayer();
        currentPlayerPointer = firstPlayerPointer;
+       roundPlayerOrder = new ArrayList<>(gamePlayerOrder);
 
        currentPot = 0;
+       playerBets = new int[] {0, 0, 0, 0};
 
 
     }
@@ -375,12 +381,73 @@ public class GameEngine {
        }
     }
 
-    public int getCurrentPlayerNumber() {return gamePlayerOrder.get(currentPlayerPointer);}
+    public int getCurrentPlayerNumber() {return roundPlayerOrder.get(currentPlayerPointer);}
 
     public void nextPlayer() {
 
-        if (currentPlayerPointer + 1 == gamePlayerOrder.size()) { currentPlayerPointer = 0; }
+        if (currentPlayerPointer + 1 >= roundPlayerOrder.size()) { currentPlayerPointer = 0; }
         else { currentPlayerPointer++; }
+    }
+
+    public boolean isCurrentPlayerFirstPlayer() {
+
+        return (currentPlayerPointer == firstPlayerPointer);
+    }
+
+    public boolean currentPlayerBet(int bet) {
+
+        if (playerByNumber.get(roundPlayerOrder.get(currentPlayerPointer)).payMarkerToPot(bet)) {
+            if (playerBets[getCurrentPlayerNumber() - 1] + bet > playerBets[largestBetPlayerNumber - 1]) {
+                currentPot += bet;
+                largestBetPlayerNumber = getCurrentPlayerNumber();
+                playerBets[getCurrentPlayerNumber() - 1] += bet;
+                return true;
+            }
+            else {
+                System.out.println("The player must bet more than the previous max bet!");
+                return false;
+            }
+        }
+        else{
+            System.out.println("The player cannot afford this bet!");
+            return false;
+        }
+
+    }
+
+    public void currentPlayerCall() {
+
+        int callingCost = playerBets[largestBetPlayerNumber - 1] - playerBets[roundPlayerOrder.get(currentPlayerPointer) - 1];
+        System.out.println("Calling cost for this player is " + callingCost);
+        if (playerByNumber.get(roundPlayerOrder.get(currentPlayerPointer)).payMarkerToPot(callingCost)) {
+            currentPot += callingCost;
+            playerBets[getCurrentPlayerNumber() - 1] += callingCost;
+        }
+
+    }
+
+    public void currentPlayerFold() {
+        roundPlayerOrder.remove(currentPlayerPointer);
+        playerBets[currentPlayerPointer] = -1;
+        if (currentPlayerPointer == roundPlayerOrder.size()) {
+            currentPlayerPointer = 0;
+        }
+
+    }
+
+    public boolean isCurrentPlayerLastPlayer() {
+        if (roundPlayerOrder.size() == 1) return true;
+        else return false;
+    }
+
+    public int getCurrentPlayerBet() {
+
+        return playerBets[getCurrentPlayerNumber() - 1];
+    }
+
+    public boolean isBettingDone() {
+
+        return (getCurrentPlayerNumber() == largestBetPlayerNumber);
     }
 
 

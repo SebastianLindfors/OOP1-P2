@@ -39,7 +39,8 @@ public class GameController {
     private Label player_turn, pot_text, p1_pot, p2_pot, p3_pot, p4_pot;
 
     @FXML
-    private Label PlayerPot[] = new Label[]{p1_mark,p2_mark,p3_mark,p4_mark};
+    private Label PlayerPot[];
+    private Label playerBets[];
 
     @FXML
     private TextField Bet_field;
@@ -85,6 +86,12 @@ public class GameController {
         PlayerPot[2] = p3_mark;
         PlayerPot[3] = p4_mark;
 
+        playerBets = new Label[4];
+        playerBets[0] = p1_pot;
+        playerBets[1] = p2_pot;
+        playerBets[2] = p3_pot;
+        playerBets[3] = p4_pot;
+
         allPlayerDice = new Button[4][5];
         allPlayerDice[0][0] = p1_die1;
         allPlayerDice[0][1] = p1_die2;
@@ -97,12 +104,10 @@ public class GameController {
         allPlayerDice[1][3] = p2_die4;
         allPlayerDice[1][4] = p2_die5;
         allPlayerDice[2][0] = p3_die1;
-        allPlayerDice[2][0] = p3_die1;
         allPlayerDice[2][1] = p3_die2;
         allPlayerDice[2][2] = p3_die3;
         allPlayerDice[2][3] = p3_die4;
         allPlayerDice[2][4] = p3_die5;
-        allPlayerDice[3][0] = p4_die1;
         allPlayerDice[3][0] = p4_die1;
         allPlayerDice[3][1] = p4_die2;
         allPlayerDice[3][2] = p4_die3;
@@ -147,15 +152,22 @@ public class GameController {
         if(p4 != null) {
             player4.setText(p4.getName());
             p4_mark.setText(String.valueOf(p4.getMarker()));
-            if(turn == false){
+            if(turn == false) {
                 turn = true;
                 player_turn.setText(p4.getName() + " turn");
           }
         }
         pot_text.setText(String.valueOf(mainGame.getCurrentPot()));
+
+        Bet_button.setDisable(true);
+        Call_button.setDisable(true);
+        Fold_button.setDisable(true);
+
+        Bet_field.setText("");
+        Bet_field.setDisable(true);
     }
 
-    public void Roll(){
+    public void roll(){
 
         if (mainGame.currentPlayerPayAnte()) {
 
@@ -186,25 +198,66 @@ public class GameController {
             updateMarkerAndPot(currentPlayerNumber);
         }
         mainGame.nextPlayer();
+        if (mainGame.isCurrentPlayerFirstPlayer()) {
+            Roll.setDisable(true);
+            Reroll.setDisable(true);
+
+            Bet_button.setDisable(false);
+            Call_button.setDisable(false);
+            Fold_button.setDisable(false);
+            Bet_field.setDisable(false);
+        }
 
 
     }
 
-//    private void UpdateBoardState() {
-//        ArrayList<Player> allPlayers = mainGame.getListOfAllPlayers();
-//
-//
-//        int number = 0;
-//        for (Player player : allPlayers){
-//            System.out.println(player.getName() + " " + number);
-//
-//            PlayerPot[number].setText("Mer Moo");
-//            //p1_mark.setText(String.valueOf(player.getMarker()));
-//            number++;
-//        }
-//
-//        pot_text.setText(String.valueOf(mainGame.getCurrentPot()));
-//    }
+    public void bet() {
+        try {
+            int playerBet = Integer.valueOf(Bet_field.getText());
+            if (mainGame.currentPlayerBet(playerBet)) {
+                playerBets[mainGame.getCurrentPlayerNumber() - 1].setText(String.valueOf(mainGame.getCurrentPlayerBet()));
+                updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
+                mainGame.nextPlayer();
+            }
+        }
+        catch (NumberFormatException nfe) {
+            Bet_field.setText("");
+        }
+
+
+    }
+
+    public void call() {
+
+        mainGame.currentPlayerCall();
+        playerBets[mainGame.getCurrentPlayerNumber() - 1].setText("Called");
+        updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
+        mainGame.nextPlayer();
+
+        if (mainGame.isBettingDone()) {
+            bettingDone();
+        }
+
+
+    }
+
+    public void fold() {
+        System.out.println("Player Number " + mainGame.getCurrentPlayerNumber() + " folded.");
+
+        playerBets[mainGame.getCurrentPlayerNumber() - 1].setText("Folded");
+        mainGame.currentPlayerFold();
+
+        System.out.println("It is now player number " + mainGame.getCurrentPlayerNumber() + " turn");
+        if (mainGame.isCurrentPlayerLastPlayer()) {
+            victory(mainGame.getCurrentPlayerNumber());
+        }
+
+        if (mainGame.isBettingDone()) {
+            bettingDone();
+        }
+
+    }
+
 
     public void updatePlayerDie(int playerNumber) {
 
@@ -234,6 +287,36 @@ public class GameController {
     public void updateMarkerAndPot(int player) {
         PlayerPot[player - 1].setText(String.valueOf(mainGame.getPlayer(player).getMarker()));
         pot_text.setText(String.valueOf(mainGame.getCurrentPot()));
+    }
+
+    public void victory(int playerNumber) {
+
+        System.out.println("Player number " + mainGame.getCurrentPlayerNumber() + " has won the round and " + mainGame.getCurrentPot() + " chips.");
+        mainGame.getPlayer(playerNumber).payMarkerFromPot(mainGame.getCurrentPot());
+        updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
+        newRound();
+        updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
+
+    }
+
+    public void newRound() {
+        mainGame.newRound();
+        for (int i = 0; i < 4; i++) {
+            playerBets[i].setText("0");
+        }
+
+    }
+
+    public void bettingDone() {
+        Bet_button.setDisable(true);
+        Call_button.setDisable(true);
+        Fold_button.setDisable(true);
+
+        Bet_field.setText("");
+        Bet_field.setDisable(true);
+
+        Reroll.setDisable(false);
+
     }
 
 
