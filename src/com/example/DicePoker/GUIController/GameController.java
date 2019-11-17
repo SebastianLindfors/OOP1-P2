@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 public class GameController {
 
+    boolean[] rerollSelected;
+
     boolean turn = false;
 
     GameEngine  mainGame;
@@ -118,6 +120,7 @@ public class GameController {
         allPlayerDice[3][3] = p4_die4;
         allPlayerDice[3][4] = p4_die5;
 
+        rerollSelected = new boolean[5];
 
         ArrayList<Player> lop = new ArrayList<>();
         lop.add(p1);
@@ -172,6 +175,8 @@ public class GameController {
 
         Bet_field.setText("");
         Bet_field.setDisable(true);
+
+        Reroll.setDisable(true);
     }
 
     public void roll(){
@@ -179,30 +184,16 @@ public class GameController {
         if (mainGame.currentPlayerPayAnte()) {
 
             int diceValues[] = mainGame.rollCurrentPlayer();
-
-            for(int i=0; i< diceValues.length; i++) {
-
-                Dices[i].getStyleClass().clear();
-               if(diceValues[i] == 1){
-                   Dices[i].getStyleClass().add("dice1");
-               } else if(diceValues[i] == 2){
-                   Dices[i].getStyleClass().add("dice2");
-               } else if(diceValues[i] == 3){
-                   Dices[i].getStyleClass().add("dice3");
-               } else if(diceValues[i] == 4){
-                   Dices[i].getStyleClass().add("dice4");
-               } else if(diceValues[i] == 5){
-                   Dices[i].getStyleClass().add("dice5");
-               } else if(diceValues[i] == 6){
-                   Dices[i].getStyleClass().add("dice6");
-               }
-            }
+            updateMiddleDie(mainGame.getCurrentPlayerNumber());
 
             int currentPlayerNumber = mainGame.getCurrentPlayerNumber();  //Current player number refers to which players graphics are to be updated.
             System.out.println("Player Number: " + currentPlayerNumber);
-            updatePlayerDie(currentPlayerNumber);
 
+            updatePlayerDie(currentPlayerNumber);
             updateMarkerAndPot(currentPlayerNumber);
+        }
+        else {
+
         }
         mainGame.nextPlayer();
         if (mainGame.isCurrentPlayerFirstPlayer()) {
@@ -218,6 +209,33 @@ public class GameController {
 
     }
 
+    public void reroll() {
+        System.out.println("Reroll 1: " + rerollSelected[0]);
+        System.out.println("Reroll 2: " + rerollSelected[1]);
+        System.out.println("Reroll 3: " + rerollSelected[2]);
+        System.out.println("Reroll 4: " + rerollSelected[3]);
+        System.out.println("Reroll 5: " + rerollSelected[4]);
+
+        mainGame.rerollCurrentPlayer(rerollSelected);
+        updatePlayerDie(mainGame.getCurrentPlayerNumber());
+        updateMiddleDie(mainGame.getCurrentPlayerNumber());
+        mainGame.nextPlayer();
+
+        for (int i = 0; i < 5; i++) {
+            if (Dices[i].isSelected()) {
+                Dices[i].fire();
+            }
+        }
+        updateMiddleDie(mainGame.getCurrentPlayerNumber());
+
+        if (mainGame.isBettingDone()) {
+            ArrayList<Integer> winningNmbers = mainGame.roundWinner();
+            if (winningNmbers.size() == 1) {
+                victory(winningNmbers.get(0));
+            }
+        }
+    }
+
     public void bet() {
         try {
             int playerBet = Integer.valueOf(Bet_field.getText());
@@ -225,6 +243,7 @@ public class GameController {
                 playerBets[mainGame.getCurrentPlayerNumber() - 1].setText(String.valueOf(mainGame.getCurrentPlayerBet()));
                 updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
                 mainGame.nextPlayer();
+                updateMiddleDie(mainGame.getCurrentPlayerNumber());
             }
         }
         catch (NumberFormatException nfe) {
@@ -240,6 +259,7 @@ public class GameController {
         playerBets[mainGame.getCurrentPlayerNumber() - 1].setText("Called");
         updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
         mainGame.nextPlayer();
+        updateMiddleDie(mainGame.getCurrentPlayerNumber());
 
         if (mainGame.isBettingDone()) {
             bettingDone();
@@ -253,6 +273,7 @@ public class GameController {
 
         playerBets[mainGame.getCurrentPlayerNumber() - 1].setText("Folded");
         mainGame.currentPlayerFold();
+        updateMiddleDie(mainGame.getCurrentPlayerNumber());
 
         System.out.println("It is now player number " + mainGame.getCurrentPlayerNumber() + " turn");
         if (mainGame.isCurrentPlayerLastPlayer()) {
@@ -291,16 +312,40 @@ public class GameController {
 
     }
 
-    public void updateMarkerAndPot(int player) {
-        PlayerPot[player - 1].setText(String.valueOf(mainGame.getPlayer(player).getMarker()));
+    public void updateMiddleDie(int playerNumber) {
+
+        int[] diceValues = mainGame.getCurrentPlayer().getDieValues();
+        for(int i=0; i< diceValues.length; i++) {
+
+            Dices[i].getStyleClass().clear();
+            if(diceValues[i] == 1){
+                Dices[i].getStyleClass().add("dice1");
+            } else if(diceValues[i] == 2){
+                Dices[i].getStyleClass().add("dice2");
+            } else if(diceValues[i] == 3){
+                Dices[i].getStyleClass().add("dice3");
+            } else if(diceValues[i] == 4){
+                Dices[i].getStyleClass().add("dice4");
+            } else if(diceValues[i] == 5){
+                Dices[i].getStyleClass().add("dice5");
+            } else if(diceValues[i] == 6){
+                Dices[i].getStyleClass().add("dice6");
+            }
+        }
+
+
+    }
+
+    public void updateMarkerAndPot(int playerNumber) {
+        PlayerPot[playerNumber - 1].setText(String.valueOf(mainGame.getPlayer(playerNumber).getMarker()));
         pot_text.setText(String.valueOf(mainGame.getCurrentPot()));
     }
 
     public void victory(int playerNumber) {
 
-        System.out.println("Player number " + mainGame.getCurrentPlayerNumber() + " has won the round and " + mainGame.getCurrentPot() + " chips.");
+        System.out.println("Player number " + playerNumber + " has won the round and " + mainGame.getCurrentPot() + " chips.");
         mainGame.getPlayer(playerNumber).payMarkerFromPot(mainGame.getCurrentPot());
-        updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
+        updateMarkerAndPot(playerNumber);
         newRound();
         updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
 
@@ -311,6 +356,8 @@ public class GameController {
         for (int i = 0; i < 4; i++) {
             playerBets[i].setText("0");
         }
+        Reroll.setDisable(true);
+        Roll.setDisable((false));
 
     }
 
@@ -349,8 +396,10 @@ public class GameController {
                 Die1.setEffect(reflection);
                 reflection.setInput(glow);
                 glow.setInput(bloom);
+                rerollSelected[0] = true;
             }else {
                 Die1.setEffect(null);
+                rerollSelected[0] = false;
 
             }
         });
@@ -360,8 +409,10 @@ public class GameController {
                 Die2.setEffect(reflection);
                 reflection.setInput(glow);
                 glow.setInput(bloom);
+                rerollSelected[1] = true;
             }else {
                 Die2.setEffect(null);
+                rerollSelected[1] = false;
 
             }
         });
@@ -371,8 +422,10 @@ public class GameController {
                 Die3.setEffect(reflection);
                 reflection.setInput(glow);
                 glow.setInput(bloom);
+                rerollSelected[2] = true;
             }else {
                 Die3.setEffect(null);
+                rerollSelected[2] = false;
 
             }
         });
@@ -382,8 +435,10 @@ public class GameController {
                 Die4.setEffect(reflection);
                 reflection.setInput(glow);
                 glow.setInput(bloom);
+                rerollSelected[3] = true;
             }else {
                 Die4.setEffect(null);
+                rerollSelected[3] = false;
 
             }
         });
@@ -393,8 +448,10 @@ public class GameController {
                 Die5.setEffect(reflection);
                 reflection.setInput(glow);
                 glow.setInput(bloom);
+                rerollSelected[4] = true;
             }else {
                 Die5.setEffect(null);
+                rerollSelected[4] = false;
 
             }
         });

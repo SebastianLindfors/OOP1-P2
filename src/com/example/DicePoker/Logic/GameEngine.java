@@ -3,6 +3,7 @@ package com.example.DicePoker.Logic;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Arrays;
 
 public class GameEngine {
 
@@ -280,7 +281,7 @@ public class GameEngine {
 
     public static int[][] sortHandStrength(int[][] handStrength) {
 
-        int[][] output = handStrength;
+        int[][] output = handStrength.clone();
 
         for (int i = 1; i < output.length; i++ ) {
             for (int j = i; j > 0; j-- ) {
@@ -323,7 +324,7 @@ public class GameEngine {
     }
 
    public Player getCurrentPlayer() {
-        return playerByNumber.get(gamePlayerOrder.get(currentPlayerPointer));
+        return playerByNumber.get(roundPlayerOrder.get(currentPlayerPointer));
    }
 
     /**
@@ -332,13 +333,18 @@ public class GameEngine {
      * @return Returns an array of integers corresponding to the values of the rolled dice.
      */
    public int[] rollCurrentPlayer() {
-       playerByNumber.get(gamePlayerOrder.get(currentPlayerPointer)).rollAllDice();
+       playerByNumber.get(roundPlayerOrder.get(currentPlayerPointer)).rollAllDice();
        int dieNumber = 0;
        int[] output = new int[5];
        for (Die die : playerByNumber.get(gamePlayerOrder.get(currentPlayerPointer)).getDice()) {
            output[dieNumber++] = die.getCurrentFace();
        }
        return output;
+   }
+
+   public int[] rerollCurrentPlayer(boolean[] choice) {
+       playerByNumber.get(roundPlayerOrder.get(currentPlayerPointer)).rollSomeDie(choice[0], choice[1], choice[2], choice[3], choice[4]);
+       return playerByNumber.get(roundPlayerOrder.get(currentPlayerPointer)).getDieValues();
    }
 
    public Player getPlayer(int playerNumber) {
@@ -438,7 +444,7 @@ public class GameEngine {
     public boolean isCurrentPlayerLastPlayer() {
         if (roundPlayerOrder.size() == 1) return true;
         else return false;
-    }
+    } //Tests if there is only one player left in the round
 
     public int getCurrentPlayerBet() {
 
@@ -448,6 +454,28 @@ public class GameEngine {
     public boolean isBettingDone() {
 
         return (getCurrentPlayerNumber() == largestBetPlayerNumber);
+    } //tests if the current player is the one who leads the betting (which menas the betting phase is done)
+
+    public ArrayList<Integer> roundWinner() {
+
+        int[][] playerDice = new int[roundPlayerOrder.size()][5];
+        int[][] playerHandStrength = new int[roundPlayerOrder.size()][5];
+        int[][] sortedPlayerHandStrength;
+
+        for(int i = 0; i < roundPlayerOrder.size(); i++) {
+            playerDice[i] = playerByNumber.get(roundPlayerOrder.get(i)).getDieValues();
+            playerHandStrength[i] = determineHandStrength(playerDice[i]);
+        }
+        sortedPlayerHandStrength = sortHandStrength(playerHandStrength);
+
+        ArrayList<Integer> output = new ArrayList<>();
+        for (int i = 0; i < roundPlayerOrder.size(); i++) {
+            if (Arrays.equals(sortedPlayerHandStrength[0], playerHandStrength[i])) {
+                output.add(roundPlayerOrder.get(i));
+            }
+
+        }
+        return output;
     }
 
 
