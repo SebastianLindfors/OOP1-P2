@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.effect.Reflection;
+
 
 import java.util.ArrayList;
 
@@ -157,6 +159,9 @@ public class GameController {
                 player_turn.setText(p4.getName() + " turn");
           }
         }
+
+        toggleButton();
+
         pot_text.setText(String.valueOf(mainGame.getCurrentPot()));
 
         Bet_button.setDisable(true);
@@ -319,6 +324,66 @@ public class GameController {
 
     }
 
+    public void toggleButton () {
+        Reflection reflection = new Reflection();
 
+        //setting the bottom opacity of the reflection
+        reflection.setBottomOpacity(0.1);
 
+        //setting the top opacity of the reflection
+        reflection.setTopOpacity(0.5);
+
+        //setting the top offset of the reflection
+        reflection.setTopOffset(0.1);
+
+        //Setting the fraction of the reflection
+        reflection.setFraction(0.7);
+
+        //Setting action event on selected button
+        Die1.setOnAction(event -> {
+            if (Die1.isSelected()) {
+                Die1.setEffect(reflection);
+            }else {
+                Die1.setEffect(null);
+
+            }
+        });
+
+        Die2.setOnAction(event -> {
+            if (Die2.isSelected()) {
+                Die2.setEffect(reflection);
+            }else {
+                Die2.setEffect(null);
+
+            }
+        });
+
+        Die3.setOnAction(event -> {
+            if (Die3.isSelected()) {
+                Die3.setEffect(reflection);
+            }else {
+                Die3.setEffect(null);
+
+            }
+        });
+
+        Die4.setOnAction(event -> {
+            if (Die4.isSelected()) {
+                Die4.setEffect(reflection);
+            }else {
+                Die4.setEffect(null);
+
+            }
+        });
+
+        Die5.setOnAction(event -> {
+            if (Die5.isSelected()) {
+                Die5.setEffect(reflection);
+            }else {
+                Die5.setEffect(null);
+
+            }
+        });
+
+    }
 }
