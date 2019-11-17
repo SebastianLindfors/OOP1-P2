@@ -331,24 +331,19 @@ public class GameController {
         Glow glow = new Glow();
         Bloom bloom = new Bloom();
 
-        //setting the bottom opacity of the reflection
+        //Reflection settings
         reflection.setBottomOpacity(0.1);
-
-        //setting the top opacity of the reflection
         reflection.setTopOpacity(0.5);
-
-        //setting the top offset of the reflection
         reflection.setTopOffset(0.1);
-
-        //Setting the fraction of the reflection
         reflection.setFraction(0.7);
 
         //Glow effect level
         glow.setLevel(0.4);
+
         //Bloom effect level
         bloom.setThreshold(0.1);
 
-        //Setting action event on selected button
+        //Action event on selected button
         Die1.setOnAction(event -> {
             if (Die1.isSelected()) {
                 Die1.setEffect(reflection);
