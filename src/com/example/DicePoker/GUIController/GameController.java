@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.Glow;
 import javafx.scene.effect.Reflection;
 
 
@@ -326,6 +328,8 @@ public class GameController {
 
     public void toggleButton () {
         Reflection reflection = new Reflection();
+        Glow glow = new Glow();
+        Bloom bloom = new Bloom();
 
         //setting the bottom opacity of the reflection
         reflection.setBottomOpacity(0.1);
@@ -339,10 +343,17 @@ public class GameController {
         //Setting the fraction of the reflection
         reflection.setFraction(0.7);
 
+        //Glow effect level
+        glow.setLevel(0.4);
+        //Bloom effect level
+        bloom.setThreshold(0.1);
+
         //Setting action event on selected button
         Die1.setOnAction(event -> {
             if (Die1.isSelected()) {
                 Die1.setEffect(reflection);
+                reflection.setInput(glow);
+                glow.setInput(bloom);
             }else {
                 Die1.setEffect(null);
 
@@ -352,6 +363,8 @@ public class GameController {
         Die2.setOnAction(event -> {
             if (Die2.isSelected()) {
                 Die2.setEffect(reflection);
+                reflection.setInput(glow);
+                glow.setInput(bloom);
             }else {
                 Die2.setEffect(null);
 
@@ -361,6 +374,8 @@ public class GameController {
         Die3.setOnAction(event -> {
             if (Die3.isSelected()) {
                 Die3.setEffect(reflection);
+                reflection.setInput(glow);
+                glow.setInput(bloom);
             }else {
                 Die3.setEffect(null);
 
@@ -370,6 +385,8 @@ public class GameController {
         Die4.setOnAction(event -> {
             if (Die4.isSelected()) {
                 Die4.setEffect(reflection);
+                reflection.setInput(glow);
+                glow.setInput(bloom);
             }else {
                 Die4.setEffect(null);
 
@@ -379,6 +396,8 @@ public class GameController {
         Die5.setOnAction(event -> {
             if (Die5.isSelected()) {
                 Die5.setEffect(reflection);
+                reflection.setInput(glow);
+                glow.setInput(bloom);
             }else {
                 Die5.setEffect(null);
 
