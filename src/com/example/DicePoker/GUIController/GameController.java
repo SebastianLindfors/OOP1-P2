@@ -7,9 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.effect.Bloom;
-import javafx.scene.effect.Glow;
-import javafx.scene.effect.Reflection;
+import javafx.scene.effect.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 
 import java.util.ArrayList;
@@ -62,6 +63,12 @@ public class GameController {
 
     @FXML
     private ToggleButton Die1, Die2, Die3, Die4, Die5;
+
+    @FXML
+    private GridPane p1Grid, p2Grid, p3Grid, p4Grid;
+
+    @FXML
+    private VBox p1Box, p2Box, p3Box, p4Box;
 
 
     public ToggleButton[] Dices;
@@ -120,6 +127,7 @@ public class GameController {
         allPlayerDice[3][3] = p4_die4;
         allPlayerDice[3][4] = p4_die5;
 
+
         rerollSelected = new boolean[5];
 
         ArrayList<Player> lop = new ArrayList<>();
@@ -128,6 +136,8 @@ public class GameController {
         lop.add(p3);
         lop.add(p4);
         mainGame = new GameEngine(lop);
+
+        currentPlayerTurn();
 
         if(p1 != null){
             startPosition = 1;
@@ -191,11 +201,14 @@ public class GameController {
 
             updatePlayerDie(currentPlayerNumber);
             updateMarkerAndPot(currentPlayerNumber);
+
         }
         else {
 
         }
         mainGame.nextPlayer();
+        currentPlayerTurn();
+
         if (mainGame.isCurrentPlayerFirstPlayer()) {
             Roll.setDisable(true);
             Reroll.setDisable(true);
@@ -220,7 +233,7 @@ public class GameController {
         updatePlayerDie(mainGame.getCurrentPlayerNumber());
         updateMiddleDie(mainGame.getCurrentPlayerNumber());
         mainGame.nextPlayer();
-
+        currentPlayerTurn();
         for (int i = 0; i < 5; i++) {
             if (Dices[i].isSelected()) {
                 Dices[i].fire();
@@ -234,6 +247,7 @@ public class GameController {
                 victory(winningNmbers.get(0));
             }
         }
+
     }
 
     public void bet() {
@@ -243,6 +257,7 @@ public class GameController {
                 playerBets[mainGame.getCurrentPlayerNumber() - 1].setText(String.valueOf(mainGame.getCurrentPlayerBet()));
                 updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
                 mainGame.nextPlayer();
+                currentPlayerTurn();
                 updateMiddleDie(mainGame.getCurrentPlayerNumber());
             }
         }
@@ -259,6 +274,7 @@ public class GameController {
         playerBets[mainGame.getCurrentPlayerNumber() - 1].setText("Called");
         updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
         mainGame.nextPlayer();
+        currentPlayerTurn();
         updateMiddleDie(mainGame.getCurrentPlayerNumber());
 
         if (mainGame.isBettingDone()) {
@@ -457,4 +473,46 @@ public class GameController {
         });
 
     }
+
+    public void currentPlayerTurn () {
+        InnerShadow innershadow = new InnerShadow();
+
+
+    int playerTurn = mainGame.getCurrentPlayerNumber();
+
+    if (playerTurn == 1) {
+        player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
+        player_turn.setTextFill(Color.rgb(214, 0, 0));
+        p1Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.BLACK,40,0,0,0));
+    } else {
+        p1Box.setEffect(null);
+    }
+
+    if (playerTurn == 2) {
+        player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
+        player_turn.setTextFill(Color.rgb(0, 0, 204));
+        p2Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.BLACK,40,0,0,0));
+    } else {
+        p2Box.setEffect(null);
+    }
+
+    if (playerTurn == 3) {
+        player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
+        player_turn.setTextFill(Color.rgb(0, 153, 51));
+        p3Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.BLACK,40,0,0,0));
+    } else {
+        p3Box.setEffect(null);
+    }
+
+    if (playerTurn == 4) {
+        player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
+        player_turn.setTextFill(Color.rgb(255, 204, 0));
+        p4Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.BLACK,40,0,0,0));
+    } else {
+        p4Box.setEffect(null);
+    }
+}
+
+
+
 }

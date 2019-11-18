@@ -10,6 +10,8 @@
 }
 
 
+
+
 .button{
     -fx-background-color: #004d00;
     -fx-border-radius: 20;
@@ -39,6 +41,7 @@
   -fx-font: bold 12pt "Big Caslon";
   -fx-text-fill: #FFDF00;
   -fx-effect: dropshadow(three-pass-box, black, 1, 0, 0, 1);
+
 }
 
 
