@@ -379,7 +379,7 @@ public class GameEngine {
 
     public void nextFirstPlayer() {
 
-       if (firstPlayerPointer + 1 >= gamePlayerOrder.size()) {
+       if (firstPlayerPointer + 1 >= roundPlayerOrder.size()) {
            firstPlayerPointer = 0;
        }
        else {
@@ -397,7 +397,8 @@ public class GameEngine {
 
     public boolean isCurrentPlayerFirstPlayer() {
 
-        return (currentPlayerPointer == firstPlayerPointer);
+        System.out.println("CPP: " + currentPlayerPointer + " FPP: " + firstPlayerPointer);
+        return (roundPlayerOrder.get(currentPlayerPointer) == roundPlayerOrder.get(firstPlayerPointer));
     }
 
     public boolean currentPlayerBet(int bet) {
@@ -454,7 +455,7 @@ public class GameEngine {
     public boolean isBettingDone() {
 
         return (getCurrentPlayerNumber() == largestBetPlayerNumber);
-    } //tests if the current player is the one who leads the betting (which menas the betting phase is done)
+    } //tests if the current player is the one who leads the betting (which means the betting phase is done)
 
     public ArrayList<Integer> roundWinner() {
 
@@ -477,6 +478,34 @@ public class GameEngine {
         }
         return output;
     }
+
+    public void eliminateCurrentPlayer() {
+        System.out.println("Player " + getCurrentPlayerNumber() + " has been defeated");
+
+            if (firstPlayerPointer >= roundPlayerOrder.size() - 1) {
+                System.out.println("Boop");
+                firstPlayerPointer = 0;
+            }
+
+        currentPot += getCurrentPlayer().getMarker();
+        getCurrentPlayer().setMarker(0);
+        gamePlayerOrder.remove(currentPlayerPointer);
+        roundPlayerOrder.remove(currentPlayerPointer);
+
+
+        System.out.println("CPP: " + currentPlayerPointer + " RPOs: " + roundPlayerOrder.size());
+        if (currentPlayerPointer == roundPlayerOrder.size()) {
+            System.out.println("Beep");
+            currentPlayerPointer = 0;
+        }
+        System.out.println("It is now player " + getCurrentPlayerNumber() + "s turn");
+    }
+
+    public boolean isPlayerWinner() {
+        if (gamePlayerOrder.size() == 1) return true;
+        else return false;
+    }
+
 
 
 
