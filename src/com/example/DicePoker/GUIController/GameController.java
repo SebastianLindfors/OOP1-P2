@@ -187,6 +187,10 @@ public class GameController {
         Bet_field.setDisable(true);
 
         Reroll.setDisable(true);
+
+        if (!mainGame.getCurrentPlayer().isHuman()) {
+            this.roll();
+        }
     }
 
     public void roll(){
@@ -213,7 +217,13 @@ public class GameController {
                 Call_button.setDisable(false);
                 Fold_button.setDisable(false);
                 Bet_field.setDisable(false);
+
+                if (!mainGame.getCurrentPlayer().isHuman()) {
+                    aiBetting();
+                    return;
+                }
             }
+
         }
         else {
             playerBets[mainGame.getCurrentPlayerNumber() - 1].setText("Defeated");
@@ -230,13 +240,15 @@ public class GameController {
                 Call_button.setDisable(true);
                 Fold_button.setDisable(true);
                 Bet_field.setDisable(true);
+                return;
 
             }
 
         }
-
-
-
+        if (!mainGame.getCurrentPlayer().isHuman()) {
+            roll();
+            return;
+        }
     }
 
     public void reroll() {
@@ -259,10 +271,18 @@ public class GameController {
         updateMiddleDie(mainGame.getCurrentPlayerNumber());
 
         if (mainGame.isBettingDone()) {
-            ArrayList<Integer> winningNmbers = mainGame.roundWinner();
-            if (winningNmbers.size() == 1) {
-                victory(winningNmbers.get(0));
+            ArrayList<Integer> winningNumbers = mainGame.roundWinner();
+            if (winningNumbers.size() == 1) {
+                victory(winningNumbers.get(0));
+                return;
             }
+            else {
+                //TODO Code tie here
+            }
+
+        }
+        if (!mainGame.getCurrentPlayer().isHuman()) {
+            aiReroll();
         }
 
     }
@@ -282,6 +302,11 @@ public class GameController {
             Bet_field.setText("");
         }
 
+        if (!mainGame.getCurrentPlayer().isHuman()) {
+            aiBetting();
+            return;
+        }
+
 
     }
 
@@ -296,7 +321,13 @@ public class GameController {
 
         if (mainGame.isBettingDone()) {
             bettingDone();
+            return;
         }
+        if (!mainGame.getCurrentPlayer().isHuman()) {
+            aiBetting();
+            return;
+        }
+
 
 
     }
@@ -306,15 +337,21 @@ public class GameController {
 
         playerBets[mainGame.getCurrentPlayerNumber() - 1].setText("Folded");
         mainGame.currentPlayerFold();
+        currentPlayerTurn();
         updateMiddleDie(mainGame.getCurrentPlayerNumber());
 
         System.out.println("It is now player number " + mainGame.getCurrentPlayerNumber() + " turn");
         if (mainGame.isCurrentPlayerLastPlayer()) {
             victory(mainGame.getCurrentPlayerNumber());
+            return;
         }
-
         if (mainGame.isBettingDone()) {
             bettingDone();
+            return;
+        }
+        if (!mainGame.getCurrentPlayer().isHuman()) {
+            aiBetting();
+            return;
         }
 
     }
@@ -385,6 +422,140 @@ public class GameController {
 
     }
 
+    public void aiBetting() {
+
+        int highestBettingAmount = mainGame.getCurrentPlayer().getMarker() - 1;
+        int lowestBettingAmount = mainGame.getHihgestBet() + 1;
+
+        int callingCost = mainGame.getCurrentPlayerCallingCost();
+
+        int[] handStrength = mainGame.getCurrentPlayerHandStrength();
+
+        if (lowestBettingAmount > highestBettingAmount) {
+            this.fold();
+            return;
+        }
+
+        if (callingCost > mainGame.getCurrentPlayer().getMarker()) {
+            this.fold();
+            return;
+        }
+        if (callingCost == 0) {
+            if (handStrength[0] == 7) {
+                Bet_field.setText(String.valueOf(highestBettingAmount));
+                this.bet();
+                return;
+            }
+            else if (handStrength[0] > 4) {
+                Bet_field.setText(String.valueOf(Math.max(highestBettingAmount/2, lowestBettingAmount)));
+                this.bet();
+                return;
+            }
+            else if (handStrength[0] > 0) {
+                Bet_field.setText(String.valueOf(Math.min(highestBettingAmount, lowestBettingAmount + 4)));
+                this.bet();
+                return;
+            }
+            else {
+                this.call();
+                return;
+            }
+        }
+        else if (callingCost < highestBettingAmount/4) {
+            if (handStrength[0] == 7) {
+                Bet_field.setText(String.valueOf(highestBettingAmount));
+                this.bet();
+                return;
+            }
+            else if (handStrength[0] > 0) {
+                call();
+                return;
+            }
+            else {
+                fold();
+            }
+        }
+        else if (callingCost < highestBettingAmount/2) {
+            if (handStrength[0] == 7) {
+                Bet_field.setText(String.valueOf(highestBettingAmount));
+                this.bet();
+                return;
+            }
+            else if (handStrength[0] > 3) {
+                call();
+                return;
+            }
+            else {
+                fold();
+            }
+        }
+        else {
+            if (handStrength[0] == 7) {
+                Bet_field.setText(String.valueOf(highestBettingAmount));
+                this.bet();
+                return;
+            }
+            else {
+                fold();
+                return;
+            }
+        }
+
+    }
+
+    public void aiReroll() {
+
+        boolean[] toReroll = new boolean[5];
+
+        int[] diceValues = mainGame.getCurrentPlayer().getDieValues();
+
+        boolean smallStraight = true;
+        boolean largeStraight = true;
+
+        ArrayList<Integer> singeltons = new ArrayList<>();
+        ArrayList<Integer> tempSingeltons = new ArrayList<>();
+        for (int i = 1; i < 7; i ++) {
+            tempSingeltons = new ArrayList<>();
+            for (int j = 0; j < 5; j++) {
+                if (diceValues[j] == i) {
+                    tempSingeltons.add(j);
+                }
+            }
+            if (i == 1 && tempSingeltons.size() > 0) {
+                largeStraight = false;
+            }
+            if (i == 6 && tempSingeltons.size() > 0) {
+                smallStraight = false;
+            }
+            if (tempSingeltons.size() == 1) {
+                singeltons.add(tempSingeltons.get(0));
+            }
+        }
+
+        if (singeltons.size() == 5) {
+            if (smallStraight || largeStraight) {
+
+            }
+            else {
+                toReroll[singeltons.get(0)] = true;
+            }
+        }
+        else {
+            singeltons.forEach(x -> toReroll[x] = true);
+        }
+
+
+        for (int i = 0; i < 5; i++) {
+            if (toReroll[i]) {
+                Dices[i].fire();
+            }
+        }
+
+        this.reroll();
+
+
+    }
+
     public void newRound() {
         mainGame.newRound();
         for (int i = 0; i < 4; i++) {
@@ -392,6 +563,11 @@ public class GameController {
         }
         Reroll.setDisable(true);
         Roll.setDisable((false));
+
+        if (!mainGame.getCurrentPlayer().isHuman()) {
+            roll();
+            return;
+        }
 
     }
 
@@ -404,6 +580,10 @@ public class GameController {
         Bet_field.setDisable(true);
 
         Reroll.setDisable(false);
+
+        if (!mainGame.getCurrentPlayer().isHuman()) {
+            aiReroll();
+        }
 
     }
 

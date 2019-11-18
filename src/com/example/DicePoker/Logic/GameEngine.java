@@ -367,6 +367,7 @@ public class GameEngine {
        if (currentRound % 5 == 0) {
            currentAnte += 10;
        }
+       largestBetPlayerNumber = gamePlayerOrder.get(firstPlayerPointer);
        nextFirstPlayer();
        currentPlayerPointer = firstPlayerPointer;
        roundPlayerOrder = new ArrayList<>(gamePlayerOrder);
@@ -393,6 +394,11 @@ public class GameEngine {
 
         if (currentPlayerPointer + 1 >= roundPlayerOrder.size()) { currentPlayerPointer = 0; }
         else { currentPlayerPointer++; }
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     public boolean isCurrentPlayerFirstPlayer() {
@@ -450,6 +456,23 @@ public class GameEngine {
     public int getCurrentPlayerBet() {
 
         return playerBets[getCurrentPlayerNumber() - 1];
+    }
+
+    public int getHihgestBet() {
+        System.out.println("LBPN: " + largestBetPlayerNumber);
+        if (largestBetPlayerNumber == -1) {
+            return 0;
+        }
+
+        return playerBets[largestBetPlayerNumber - 1];
+    }
+
+    public int[] getCurrentPlayerHandStrength() {
+        return determineHandStrength(getCurrentPlayer().getDieValues());
+    }
+
+    public int getCurrentPlayerCallingCost() {
+        return playerBets[largestBetPlayerNumber - 1] - playerBets[roundPlayerOrder.get(currentPlayerPointer) - 1];
     }
 
     public boolean isBettingDone() {
