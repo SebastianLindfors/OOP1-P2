@@ -201,23 +201,40 @@ public class GameController {
 
             updatePlayerDie(currentPlayerNumber);
             updateMarkerAndPot(currentPlayerNumber);
+            mainGame.nextPlayer();
+            currentPlayerTurn ();
 
+            updateMiddleDie(mainGame.getCurrentPlayerNumber());
+            if (mainGame.isCurrentPlayerFirstPlayer()) {
+                Roll.setDisable(true);
+                Reroll.setDisable(true);
+
+                Bet_button.setDisable(false);
+                Call_button.setDisable(false);
+                Fold_button.setDisable(false);
+                Bet_field.setDisable(false);
+            }
         }
         else {
+            playerBets[mainGame.getCurrentPlayerNumber() - 1].setText("Defeated");
+            mainGame.eliminateCurrentPlayer();
+            currentPlayerTurn ();
+            updatePlayerDie(mainGame.getCurrentPlayerNumber());
+            updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
+            if (mainGame.isPlayerWinner()) {
+                System.out.println("Player " + mainGame.getCurrentPlayerNumber() + " has won the game!");
+                Roll.setDisable(true);
+                Reroll.setDisable(true);
+
+                Bet_button.setDisable(true);
+                Call_button.setDisable(true);
+                Fold_button.setDisable(true);
+                Bet_field.setDisable(true);
+
+            }
 
         }
-        mainGame.nextPlayer();
-        currentPlayerTurn();
 
-        if (mainGame.isCurrentPlayerFirstPlayer()) {
-            Roll.setDisable(true);
-            Reroll.setDisable(true);
-
-            Bet_button.setDisable(false);
-            Call_button.setDisable(false);
-            Fold_button.setDisable(false);
-            Bet_field.setDisable(false);
-        }
 
 
     }
@@ -363,6 +380,7 @@ public class GameController {
         mainGame.getPlayer(playerNumber).payMarkerFromPot(mainGame.getCurrentPot());
         updateMarkerAndPot(playerNumber);
         newRound();
+        currentPlayerTurn();
         updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
 
     }
