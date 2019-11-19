@@ -227,6 +227,7 @@ public class GameController {
         }
         else {
             playerBets[mainGame.getCurrentPlayerNumber() - 1].setText("Defeated");
+            PlayerPot[mainGame.getCurrentPlayerNumber() - 1].setText("0");
             mainGame.eliminateCurrentPlayer();
             currentPlayerTurn ();
             updatePlayerDie(mainGame.getCurrentPlayerNumber());
@@ -559,7 +560,9 @@ public class GameController {
     public void newRound() {
         mainGame.newRound();
         for (int i = 0; i < 4; i++) {
-            playerBets[i].setText("0");
+            if (!playerBets[i].getText().equals("Defeated")) {
+                playerBets[i].setText("0");
+            }
         }
         Reroll.setDisable(true);
         Roll.setDisable((false));

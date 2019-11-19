@@ -1,5 +1,6 @@
 package com.example.DicePoker.Logic;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -394,11 +395,6 @@ public class GameEngine {
 
         if (currentPlayerPointer + 1 >= roundPlayerOrder.size()) { currentPlayerPointer = 0; }
         else { currentPlayerPointer++; }
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException ie) {
-            Thread.currentThread().interrupt();
-        }
     }
 
     public boolean isCurrentPlayerFirstPlayer() {
@@ -527,6 +523,12 @@ public class GameEngine {
     public boolean isPlayerWinner() {
         if (gamePlayerOrder.size() == 1) return true;
         else return false;
+    }
+
+    public void saveDataToFile(String fileName) throws IOException {
+
+        String filePath = "C:\\Users\\sebas\\GitHub-Projects\\OOP1-P2\\SaveGames\\";
+
     }
 
 
