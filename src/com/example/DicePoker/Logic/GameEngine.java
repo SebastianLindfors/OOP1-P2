@@ -526,7 +526,7 @@ public class GameEngine {
 
     public String saveDataToFile(String fileName) throws IOException {
 
-        String filePath = "C:\\Users\\sebas\\GitHub-Projects\\OOP1-P2\\SaveGames\\";
+        String filePath = "C:\\Users\\sebas\\Documents\\GitHub Projects\\OOP1-P2\\SaveGames\\";
 
         String fullFile = filePath + fileName + ".sav";
 
@@ -551,7 +551,7 @@ public class GameEngine {
 
     public void loadDataFromFile(String fileName) throws IOException {
 
-        String filePath = "C:\\Users\\sebas\\GitHub-Projects\\OOP1-P2\\SaveGames\\";
+        String filePath = "C:\\Users\\sebas\\Documents\\GitHub Projects\\OOP1-P2\\SaveGames\\";
 
         String fullFile = filePath + fileName + ".sav";
 

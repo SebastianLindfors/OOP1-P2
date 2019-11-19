@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameController {
@@ -355,6 +356,17 @@ public class GameController {
         if (!mainGame.getCurrentPlayer().isHuman()) {
             aiBetting();
             return;
+        }
+
+    }
+
+    public void save() {
+        try {
+            mainGame.saveDataToFile("SaveFile");
+            System.exit(0);
+        }
+        catch (IOException ioe) {
+            ioe.printStackTrace();
         }
 
     }
@@ -727,6 +739,62 @@ public class GameController {
         } else {
             p4Box.setEffect(null);
         }
+    }
+
+    public void loadGame() {
+        try {
+            mainGame.loadDataFromFile("SaveFile");
+        }
+        catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        Player firstPlayer = mainGame.getCurrentPlayer();
+        for (int i = 1; i < 5; i++) {
+        mainGame.nextPlayer();
+            if (mainGame.getCurrentPlayerNumber() == 1) {
+                startPosition = 1;
+                player1.setText(mainGame.getCurrentPlayer().getName());
+                turn = true;
+                p1_mark.setText(String.valueOf(mainGame.getCurrentPlayer().getMarker()));
+                player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
+            }
+
+            if (mainGame.getCurrentPlayerNumber() == 2) {
+                startPosition = 2;
+                player2.setText(mainGame.getCurrentPlayer().getName());
+                p2_mark.setText(String.valueOf(mainGame.getCurrentPlayer().getMarker()));
+                if (turn == false) {
+                    turn = true;
+                    player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
+                }
+            }
+
+
+            if (mainGame.getCurrentPlayerNumber() == 3) {
+                player3.setText(mainGame.getCurrentPlayer().getName());
+                p3_mark.setText(String.valueOf(mainGame.getCurrentPlayer().getMarker()));
+                if (turn == false) {
+                    turn = true;
+                    player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
+                }
+            }
+
+
+            if (mainGame.getCurrentPlayerNumber() == 4) {
+                player4.setText(mainGame.getCurrentPlayer().getName());
+                p4_mark.setText(String.valueOf(mainGame.getCurrentPlayer().getMarker()));
+                if (turn == false) {
+                    turn = true;
+                    player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
+                }
+            }
+
+        }
+
+        currentPlayerTurn();
+
+
+
     }
 
 

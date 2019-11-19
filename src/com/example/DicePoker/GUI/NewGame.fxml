@@ -237,7 +237,7 @@
                                           <Insets top="10.0" />
                                        </padding>
                                     </GridPane>
-                                    <Button fx:id="save" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="35.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="35.0" style="-fx-background-color: #004d00;" text="save" textFill="#ffe6e6">
+                                    <Button fx:id="save" onMouseClicked="#save" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="35.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="35.0" style="-fx-background-color: #004d00;" text="save" textFill="#ffe6e6">
                                        <font>
                                           <Font name="Arial" size="10.0" />
                                        </font>

@@ -1,5 +1,7 @@
 package com.example.DicePoker.GUI;
 
+import com.example.DicePoker.GUIController.GameController;
+import com.example.DicePoker.Logic.Player;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -89,7 +90,7 @@ public class MainGUI extends Application {
         //Handle the action events for the Load Game Button
         btnLoad.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent ae) {
-                response.setText("Load Game.");
+                loadGame();
             }
             //TODO -- Sett action til ny scene --//
 
@@ -153,5 +154,35 @@ public class MainGUI extends Application {
             e.printStackTrace();
             return;
         }
+
+    }
+
+    @FXML
+    public void loadGame() {
+
+        Player p1 = new Player("Temp1", 1, true);
+        Player p2 = new Player("Temp2", 2, true);
+        Player p3 = new Player("Temp3", 3, true);
+        Player p4 = new Player("Temp4", 4, true);
+
+        FXMLLoader fxmlLoader = null;
+        try {
+            fxmlLoader = new FXMLLoader(getClass().getResource("../GUI/NewGame.fxml"));
+            Parent startGame = fxmlLoader.load();
+            Stage stage = new Stage();
+
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("DICE POKER");
+            stage.setScene(new Scene(startGame, 620, 480));
+            stage.show();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+        GameController gameController = fxmlLoader.getController();
+        gameController.initialize(p1, p2, p3, p4);
+        gameController.loadGame();
+
+
     }
 }
