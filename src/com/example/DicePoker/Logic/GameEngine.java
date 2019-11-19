@@ -561,19 +561,50 @@ public class GameEngine {
         boolean playerLine = true;
 
         int playerNumber = 1;
+        this.roundPlayerOrder = new ArrayList<>();
+        this.gamePlayerOrder = new ArrayList<>();
 
-        ArrayList<Player> lop = new ArrayList<>();
+        ArrayList<Integer> lop = new ArrayList<>();
         ArrayList<String> data = new ArrayList<>();
         while ((line = inputReader.readLine()) != null) {
-           
+            String[] firstSplit = line.split(":");
+            System.out.println(firstSplit[0]);
+            if (firstSplit.length > 1) {
+                System.out.println("moo");
+                String[] secondSplit = firstSplit[1].split("\t");
+                playerByNumber.put(Integer.parseInt(firstSplit[0].strip()), new Player(secondSplit[0], Integer.parseInt(secondSplit[1]), Boolean.parseBoolean(secondSplit[2])));
+                lop.add(Integer.parseInt(firstSplit[0].strip()));
+                String[] thirdSplit = secondSplit[3].split(" ");
+                if (thirdSplit[5].equals("true")) {
+                    gamePlayerOrder.add(Integer.parseInt(firstSplit[0].strip()));
+                }
+                if (thirdSplit[6].equals("true")) {
+                    roundPlayerOrder.add(Integer.parseInt(firstSplit[0].strip()));
+                }
+                ArrayList<Die> playerDie = playerByNumber.get(Integer.parseInt(firstSplit[0].strip())).getDice();
+                for (int i = 0; i < 5; i++) {
+                    playerDie.get(i).setCurrentFace(Integer.parseInt(thirdSplit[i]));
+                }
+            }
+            else {
+                System.out.println("Mee");
+                for (String s : line.split("\t| ")) {
+                    data.add(s);
+                }
+            }
         }
+        currentPlayerPointer = Integer.valueOf(data.get(0));
+        firstPlayerPointer = Integer.valueOf(data.get(1));
+        currentPot = Integer.valueOf(data.get(2));
+        currentAnte = Integer.valueOf(data.get(3));
+        currentRound = Integer.valueOf(data.get(4));
+        largestBetPlayerNumber = Integer.valueOf(data.get(5));
+        playerBets[0]  = Integer.valueOf(data.get(6));
+        playerBets[1]  = Integer.valueOf(data.get(7));
+        playerBets[2]  = Integer.valueOf(data.get(8));
+        playerBets[3]  = Integer.valueOf(data.get(9));
 
 
-    }
-
-
-
-
-
-
+        }
 }
+
