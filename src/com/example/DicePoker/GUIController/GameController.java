@@ -145,7 +145,7 @@ public class GameController {
             turn = true;
             p1_mark.setText(String.valueOf(p1.getMarker()));
             player_turn.setText(p1.getName() + " turn");
-        }
+        } else {p1_pot.setText("N/A");}
 
         if(p2 != null) {
             startPosition = 2;
@@ -155,7 +155,7 @@ public class GameController {
                 turn = true;
                 player_turn.setText(p2.getName() + " turn");
             }
-        }
+        } else {p2_pot.setText("N/A");}
 
         if(p3 != null) {
             player3.setText(p3.getName());
@@ -164,7 +164,7 @@ public class GameController {
                 turn = true;
                 player_turn.setText(p3.getName() + " turn");
             }
-        }
+        } else {p3_pot.setText("N/A");}
 
         if(p4 != null) {
             player4.setText(p4.getName());
@@ -173,8 +173,8 @@ public class GameController {
                 turn = true;
                 player_turn.setText(p4.getName() + " turn");
           }
-        }
-
+        } else {p4_pot.setText("N/A");}
+        currentPlayerTurn();
         toggleButton();
 
         pot_text.setText(String.valueOf(mainGame.getCurrentPot()));
@@ -688,7 +688,7 @@ public class GameController {
         p1Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.RED,10,0,0,0));
       //  p1Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.GREY,200,0.4,0,0));
         // p1Box.setEffect(boxBlur);
-    } else if (p1_pot.getText().equals("Defeated")) {
+    } else if (p1_pot.getText().equals("Defeated") || p1_pot.getText().equals("N/A")) {
         p1Box.setEffect(null);
         p1Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.GREY,200,0.4,0,0));
         p1Box.setDisable(true);
@@ -700,7 +700,7 @@ public class GameController {
         player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
         player_turn.setTextFill(Color.rgb(0, 0, 204));
         p2Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.BLUE,10,0,0,0));
-    } else if (p2_pot.getText().equals("Defeated")) {
+    } else if (p2_pot.getText().equals("Defeated") || p2_pot.getText().equals("N/A")) {
         p2Box.setEffect(null);
         p2Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.GREY,200,0.4,0,0));
         p2Box.setDisable(true);
@@ -712,7 +712,7 @@ public class GameController {
         player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
         player_turn.setTextFill(Color.rgb(0, 153, 51));
         p3Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.GREEN,10,0,0,0));
-    } else if (p3_pot.getText().equals("Defeated")) {
+    } else if (p3_pot.getText().equals("Defeated") || p3_pot.getText().equals("N/A")) {
         p3Box.setEffect(null);
         p3Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.GREY,200,0.4,0,0));
         p3Box.setDisable(true);
@@ -724,7 +724,7 @@ public class GameController {
         player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
         player_turn.setTextFill(Color.rgb(255, 165, 0));
         p4Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.ORANGE,10,0,0,0));
-    } else if (p4_pot.getText().equals("Defeated")) {
+    } else if (p4_pot.getText().equals("Defeated") || p4_pot.getText().equals("N/A")) {
         p4Box.setEffect(null);
         p4Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.GREY,200,0.4,0,0));
         p4Box.setDisable(true);

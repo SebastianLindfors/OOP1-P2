@@ -19,7 +19,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" stylesheets="@../../../../com.example.DicePoker.css" text="Save" textFill="#ffe6e6" GridPane.rowIndex="2">
+            <Button fx:id="save" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" stylesheets="@../../../../com.example.DicePoker.css" text="Save" textFill="#ffe6e6" GridPane.rowIndex="2">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -27,7 +27,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </GridPane.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="89.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" stylesheets="@../../../../com.example.DicePoker.css" text="Quit" textFill="#ffe6e6" GridPane.rowIndex="4">
+            <Button fx:id="quit" layoutX="10.0" layoutY="89.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" stylesheets="@../../../../com.example.DicePoker.css" text="Quit" textFill="#ffe6e6" GridPane.rowIndex="4">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
