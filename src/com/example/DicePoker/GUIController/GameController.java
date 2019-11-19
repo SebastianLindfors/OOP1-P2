@@ -233,6 +233,7 @@ public class GameController {
             updatePlayerDie(mainGame.getCurrentPlayerNumber());
             updateMarkerAndPot(mainGame.getCurrentPlayerNumber());
             if (mainGame.isPlayerWinner()) {
+                player_turn.setText(mainGame.getCurrentPlayer().getName() + " WINS");
                 System.out.println("Player " + mainGame.getCurrentPlayerNumber() + " has won the game!");
                 Roll.setDisable(true);
                 Reroll.setDisable(true);
