@@ -676,15 +676,21 @@ public class GameController {
     }
 
     public void currentPlayerTurn () {
-        InnerShadow innershadow = new InnerShadow();
-
+        BoxBlur boxBlur = new BoxBlur();
+        boxBlur.setIterations(10);
 
     int playerTurn = mainGame.getCurrentPlayerNumber();
 
     if (playerTurn == 1) {
         player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
         player_turn.setTextFill(Color.rgb(214, 0, 0));
-        p1Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.BLACK,40,0,0,0));
+        p1Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.RED,10,0,0,0));
+      //  p1Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.GREY,200,0.4,0,0));
+        // p1Box.setEffect(boxBlur);
+    } else if (p1_pot.getText().equals("Defeated")) {
+        p1Box.setEffect(null);
+        p1Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.GREY,200,0.4,0,0));
+        p1Box.setDisable(true);
     } else {
         p1Box.setEffect(null);
     }
@@ -692,7 +698,11 @@ public class GameController {
     if (playerTurn == 2) {
         player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
         player_turn.setTextFill(Color.rgb(0, 0, 204));
-        p2Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.BLACK,40,0,0,0));
+        p2Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.BLUE,10,0,0,0));
+    } else if (p2_pot.getText().equals("Defeated")) {
+        p2Box.setEffect(null);
+        p2Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.GREY,200,0.4,0,0));
+        p2Box.setDisable(true);
     } else {
         p2Box.setEffect(null);
     }
@@ -700,20 +710,27 @@ public class GameController {
     if (playerTurn == 3) {
         player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
         player_turn.setTextFill(Color.rgb(0, 153, 51));
-        p3Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.BLACK,40,0,0,0));
+        p3Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.GREEN,10,0,0,0));
+    } else if (p3_pot.getText().equals("Defeated")) {
+        p3Box.setEffect(null);
+        p3Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.GREY,200,0.4,0,0));
+        p3Box.setDisable(true);
     } else {
         p3Box.setEffect(null);
     }
 
     if (playerTurn == 4) {
         player_turn.setText(mainGame.getCurrentPlayer().getName() + " turn");
-        player_turn.setTextFill(Color.rgb(255, 204, 0));
-        p4Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.BLACK,40,0,0,0));
+        player_turn.setTextFill(Color.rgb(255, 165, 0));
+        p4Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.ORANGE,10,0,0,0));
+    } else if (p4_pot.getText().equals("Defeated")) {
+        p4Box.setEffect(null);
+        p4Box.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.GREY,200,0.4,0,0));
+        p4Box.setDisable(true);
     } else {
         p4Box.setEffect(null);
     }
 }
-
 
 
 }
