@@ -290,7 +290,7 @@
                            <children>
                               <VBox fx:id="p4Box" alignment="TOP_CENTER" layoutX="57.0" layoutY="-2.0" prefHeight="195.0" prefWidth="214.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label id="smallerheadline" fx:id="player4" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="214.0" style="-fx-text-fill: #ffcc00;" stylesheets="@../../../../com.example.DicePoker.css" text="Player4" textFill="#abbb00">
+                                    <Label id="smallerheadline" fx:id="player4" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="24.0" prefWidth="214.0" style="-fx-text-fill: ORANGE;" stylesheets="@../../../../com.example.DicePoker.css" text="Player4" textFill="#abbb00">
                                        <font>
                                           <Font name="Arial Bold" size="12.800000190734863" />
                                        </font></Label>
