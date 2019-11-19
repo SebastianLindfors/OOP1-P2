@@ -7,6 +7,7 @@ import com.example.DicePoker.Logic.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -245,6 +246,29 @@ public class GameEngineTest {
         testGame = new GameEngine(lop);
         //Assert.assertArrayEquals(testGame.getPlayerOrder(), new int[]{1,2,3,4});
 
+
+    }
+
+    @Test
+    public void saveDataTest() {
+
+        ArrayList<Player> lop = new ArrayList<>();
+        lop.add(new Player("Sebbe", 100, true));
+        lop.add(new Player("Nusret", 75, false));
+        lop.add(new Player("Heidi", 50, true));
+        lop.add(new Player("Kamil", 25, false));
+
+        GameEngine testGame = new GameEngine(lop);
+
+        try {
+            String actualFileName = testGame.saveDataToFile("Sebbe");
+            String expectedFileName = "C:\\Users\\sebas\\GitHub-Projects\\OOP1-P2\\SaveGames\\Sebbe.sav";
+
+            testGame.loadDataFromFile("Sebbe");
+        }
+        catch (IOException ioe) {
+            System.out.println("LOL Whut?");
+        }
 
     }
 

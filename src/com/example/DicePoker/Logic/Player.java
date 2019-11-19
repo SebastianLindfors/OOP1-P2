@@ -8,7 +8,7 @@ public class Player {
     private ArrayList<Die> dice = new ArrayList();
     Die die1,die2, die3, die4, die5;
     boolean isHuman;
-    boolean folded = false, bet = false;
+
 
     public Player(String name, int marker, boolean isHuman) {
         this.name = name;
@@ -50,22 +50,6 @@ public class Player {
     }
 
     public boolean isHuman() { return isHuman; }
-
-    public boolean isFolded() {
-        return folded;
-    }
-
-    public void setFolded(boolean folded) {
-        this.folded = folded;
-    }
-
-    public boolean isBet() {
-        return bet;
-    }
-
-    public void setBet(boolean bet) {
-        this.bet = bet;
-    }
 
     public void rollAllDice() {
         die1.roll();
@@ -123,5 +107,17 @@ public class Player {
 
         this.marker += pot;
 
+    }
+
+    public String toStorageString() {
+
+        StringBuilder storageString = new StringBuilder();
+
+        storageString.append(this.name + "\t");
+        storageString.append(this.marker + "\t");
+        storageString.append(this.isHuman +  "\t");
+        dice.forEach(x -> storageString.append(x.getCurrentFace()).append(" "));
+
+        return storageString.toString();
     }
 }

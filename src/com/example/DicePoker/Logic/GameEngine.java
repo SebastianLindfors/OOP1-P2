@@ -1,6 +1,9 @@
 package com.example.DicePoker.Logic;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,15 +34,12 @@ public class GameEngine {
     int currentPlayerPointer = 0;
     int firstPlayerPointer = 0;
 
-    int[] playerOrder;
-
     int[] playerBets = {0, 0, 0, 0};  //This array stores the total bet for all players in a round.
     int largestBetPlayerNumber = 1; //This variable keeps track of which player currently has made the largest bet.
 
     public GameEngine(ArrayList<Player> listOfPlayers) {
 
         int playerNumbers = 1;
-        playerOrder = new int[listOfPlayers.size()];
         for (Player player : listOfPlayers) {
             if (player == null) {
                 playerNumbers++;
@@ -49,7 +49,6 @@ public class GameEngine {
             gamePlayerOrder.add(playerNumbers);
             roundPlayerOrder.add(playerNumbers);
             playerByNumber.put(playerNumbers++, player);
-            playerOrder[playerNumbers - 2] = playerNumbers - 1;
             playersAtStart.add(player);
             playersInGame.add(player);
         }
@@ -525,9 +524,50 @@ public class GameEngine {
         else return false;
     }
 
-    public void saveDataToFile(String fileName) throws IOException {
+    public String saveDataToFile(String fileName) throws IOException {
 
         String filePath = "C:\\Users\\sebas\\GitHub-Projects\\OOP1-P2\\SaveGames\\";
+
+        String fullFile = filePath + fileName + ".sav";
+
+        PrintWriter outStream = new PrintWriter(fullFile);
+        for (int number : playerByNumber.keySet()) {
+            outStream.println( number + " : " + playerByNumber.get(number).toStorageString() + (gamePlayerOrder.contains(number)) + " " +  roundPlayerOrder.contains(number));
+        }
+        outStream.println(currentPlayerPointer +"\t" + firstPlayerPointer + "\t" + currentPot + "\t"
+                + currentAnte + "\t" + currentRound + "\t" + largestBetPlayerNumber);
+        for (int i = 0; i < 4; i++) {
+            outStream.print(playerBets[i] + " ");
+        }
+
+        outStream.close();
+
+
+
+        System.out.println(fullFile);
+        return fullFile;
+
+    }
+
+    public void loadDataFromFile(String fileName) throws IOException {
+
+        String filePath = "C:\\Users\\sebas\\GitHub-Projects\\OOP1-P2\\SaveGames\\";
+
+        String fullFile = filePath + fileName + ".sav";
+
+        BufferedReader inputReader = new BufferedReader(new FileReader(fullFile));
+
+        String line;
+        boolean playerLine = true;
+
+        int playerNumber = 1;
+
+        ArrayList<Player> lop = new ArrayList<>();
+        ArrayList<String> data = new ArrayList<>();
+        while ((line = inputReader.readLine()) != null) {
+           
+        }
+
 
     }
 
